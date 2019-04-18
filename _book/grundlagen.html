@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 2 Grundlagen | A Minimal Book Example</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 2 Grundlagen | A Minimal Book Example" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Grundlagen | A Minimal Book Example" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Yihui Xie">
+
+
+<meta name="date" content="2019-04-18">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="tidyverse.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="grundlagen.html"><a href="grundlagen.html"><i class="fa fa-check"></i><b>2</b> Grundlagen</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="grundlagen.html"><a href="grundlagen.html#r-als-taschenrechner"><i class="fa fa-check"></i><b>2.0.1</b> R als Taschenrechner</a></li>
+<li class="chapter" data-level="2.0.2" data-path="grundlagen.html"><a href="grundlagen.html#objekte-und-zuweisung"><i class="fa fa-check"></i><b>2.0.2</b> Objekte und Zuweisung</a></li>
+<li class="chapter" data-level="2.0.3" data-path="grundlagen.html"><a href="grundlagen.html#wichtige-operatoren"><i class="fa fa-check"></i><b>2.0.3</b> Wichtige Operatoren</a></li>
+<li class="chapter" data-level="2.0.4" data-path="grundlagen.html"><a href="grundlagen.html#vektoren-i"><i class="fa fa-check"></i><b>2.0.4</b> Vektoren I</a></li>
+<li class="chapter" data-level="2.0.5" data-path="grundlagen.html"><a href="grundlagen.html#funktionen"><i class="fa fa-check"></i><b>2.0.5</b> Funktionen</a></li>
+<li class="chapter" data-level="2.0.6" data-path="grundlagen.html"><a href="grundlagen.html#vektoren-ii"><i class="fa fa-check"></i><b>2.0.6</b> Vektoren II</a></li>
+<li class="chapter" data-level="2.0.7" data-path="grundlagen.html"><a href="grundlagen.html#dataframes"><i class="fa fa-check"></i><b>2.0.7</b> Dataframes</a></li>
+<li class="chapter" data-level="2.1" data-path="grundlagen.html"><a href="grundlagen.html#profiles-of-individual-radicalization-in-the-united-states-pirus"><i class="fa fa-check"></i><b>2.1</b> Profiles of Individual Radicalization in the United States (PIRUS)</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>3</b> Tidyverse</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="tidyverse.html"><a href="tidyverse.html#mutate"><i class="fa fa-check"></i><b>3.0.1</b> mutate</a></li>
+<li class="chapter" data-level="3.0.2" data-path="tidyverse.html"><a href="tidyverse.html#ifelse"><i class="fa fa-check"></i><b>3.0.2</b> ifelse</a></li>
+<li class="chapter" data-level="3.0.3" data-path="tidyverse.html"><a href="tidyverse.html#case_when"><i class="fa fa-check"></i><b>3.0.3</b> case_when</a></li>
+<li class="chapter" data-level="3.0.4" data-path="tidyverse.html"><a href="tidyverse.html#select"><i class="fa fa-check"></i><b>3.0.4</b> select</a></li>
+<li class="chapter" data-level="3.0.5" data-path="tidyverse.html"><a href="tidyverse.html#filter"><i class="fa fa-check"></i><b>3.0.5</b> filter</a></li>
+<li class="chapter" data-level="3.0.6" data-path="tidyverse.html"><a href="tidyverse.html#rename"><i class="fa fa-check"></i><b>3.0.6</b> rename</a></li>
+<li class="chapter" data-level="3.0.7" data-path="tidyverse.html"><a href="tidyverse.html#pipe"><i class="fa fa-check"></i><b>3.0.7</b> Pipe %&gt;%</a></li>
+<li class="chapter" data-level="3.0.8" data-path="tidyverse.html"><a href="tidyverse.html#variablen-auspragungen-zahlen-mit-count-tabyl-und-tally"><i class="fa fa-check"></i><b>3.0.8</b> Variablen(-ausprägungen) zählen mit <code>count</code>, <code>tabyl</code> und <code>tally</code></a></li>
+<li class="chapter" data-level="3.0.9" data-path="tidyverse.html"><a href="tidyverse.html#group_by-summary"><i class="fa fa-check"></i><b>3.0.9</b> group_by + summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>4</b> <code>ggplot2</code></a><ul>
+<li class="chapter" data-level="4.1" data-path="ggplot2.html"><a href="ggplot2.html#zwei-funktionen-von-datenvisualisierungen"><i class="fa fa-check"></i><b>4.1</b> Zwei Funktionen von Datenvisualisierungen</a></li>
+<li class="chapter" data-level="4.2" data-path="ggplot2.html"><a href="ggplot2.html#grammar-of-graphics"><i class="fa fa-check"></i><b>4.2</b> Grammar of Graphics</a></li>
+<li class="chapter" data-level="4.3" data-path="ggplot2.html"><a href="ggplot2.html#die-evolution-einer-grafik"><i class="fa fa-check"></i><b>4.3</b> Die Evolution einer Grafik</a></li>
+<li class="chapter" data-level="4.4" data-path="ggplot2.html"><a href="ggplot2.html#welche-geoms-gibts-es"><i class="fa fa-check"></i><b>4.4</b> Welche Geoms gibts es?</a></li>
+<li class="chapter" data-level="4.5" data-path="ggplot2.html"><a href="ggplot2.html#farben"><i class="fa fa-check"></i><b>4.5</b> Farben</a></li>
+<li class="chapter" data-level="4.6" data-path="ggplot2.html"><a href="ggplot2.html#plot-theming"><i class="fa fa-check"></i><b>4.6</b> Plot Theming</a></li>
+<li class="chapter" data-level="4.7" data-path="ggplot2.html"><a href="ggplot2.html#some-informative-plots"><i class="fa fa-check"></i><b>4.7</b> Some Informative Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>5</b> Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="analysis.html"><a href="analysis.html#packages"><i class="fa fa-check"></i><b>5.1</b> Packages</a></li>
+<li class="chapter" data-level="5.2" data-path="analysis.html"><a href="analysis.html#load-data"><i class="fa fa-check"></i><b>5.2</b> Load Data</a></li>
+<li class="chapter" data-level="5.3" data-path="analysis.html"><a href="analysis.html#lineare-regression"><i class="fa fa-check"></i><b>5.3</b> Lineare Regression</a></li>
+<li class="chapter" data-level="5.4" data-path="analysis.html"><a href="analysis.html#logistische-regression"><i class="fa fa-check"></i><b>5.4</b> Logistische Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="grundlagen" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Grundlagen</h1>
+<p>Zunächst einmal die Basics zu Rmarkdown.</p>
+<p>Das ist ein Chunk:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;Hello World!&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;Hello World!&quot;</code></pre>
+<p>Klick doch einfach mal auf den grünen “Play” Button.</p>
+<div id="r-als-taschenrechner" class="section level3">
+<h3><span class="header-section-number">2.0.1</span> R als Taschenrechner</h3>
+<ul>
+<li><code>+</code> addieren</li>
+<li><code>-</code> subtrahieren</li>
+<li><code>*</code> multiplizieren</li>
+<li><code>/</code> dividieren</li>
+<li><code>^</code> exponieren</li>
+</ul>
+<p><strong>Aufgaben:</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>34+77</p></li>
+<li><p>(500 geteilt durch 125) plus 3 mal 6 hoch 2</p></li>
+<li><p>Berechne die Differenz zwischen 2018 und dem Jahr, an dem du begonnen hast zu studieren und dividiere das durch die Differenz zwischen 2018 und dem Jahr, in dem du geboren wurdest. Multipliziere dies mit 100, um den Prozentsatz deines Lebens zu erhalten, den du an die Uni verbracht hast.</p></li>
+</ol>
+</div>
+<div id="objekte-und-zuweisung" class="section level3">
+<h3><span class="header-section-number">2.0.2</span> Objekte und Zuweisung</h3>
+<p>In R kann man je nach Rechenleistung zehntausende Datensätze auf einmal laden und verarbeiten. Das wird möglich da jeder Datensatz seinen eigenen Namen besitzt. Dieser muss mit einem Buchstaben beginnen, kann aber durchaus auch . oder _ oder Zahlen enthalten. Um einem Objekt einen Namen zuzuweisen wird das Zeichen &lt;- (Zuweisungspfeil) eingesetzt. Objekte können einzelne Zahlen, Variablen oder auch Datensätze sein. Mit den Objektennamen können Daten jeglicher Art abgespeichert und abgerufen werden.</p>
+<p><strong>Führe einfach mal den folgenden Chunk aus!</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">2</span>   <span class="co">#definiere x als 1</span>
+
+x</code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p><strong>Aufgaben:</strong></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Erstelle ein neues Objekt y mit deiner Lieblingszahl. Addiere x und y und speichere das Ergebnis in z. Gebe z aus!</li>
+</ol>
+</div>
+<div id="wichtige-operatoren" class="section level3">
+<h3><span class="header-section-number">2.0.3</span> Wichtige Operatoren</h3>
+<p><strong>Boolean</strong></p>
+<ul>
+<li><code>&amp;</code> (logisch) und</li>
+<li><code>|</code> (logisch) oder</li>
+<li><code>!</code> (logisch) nicht</li>
+</ul>
+<p><strong>Weitere Operatoren</strong></p>
+<ul>
+<li><code>==</code> (logisch) ist gleich</li>
+<li><code>!=</code> (logisch) ist ungleich</li>
+<li><code>%in%</code> Vektor ist gleich</li>
+<li><code>&gt;</code> größer als</li>
+<li><code>&lt;</code> kleiner als</li>
+<li><code>&gt;=</code> größer gleich</li>
+<li><code>&lt;=</code> kleiner gleich</li>
+<li><code>is.na()</code> ist gleich NA (fehlender Wert)</li>
+<li><code>!is.na()</code> ist ungleich NA</li>
+</ul>
+<p><strong>Beispiele</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">3</span>    <span class="co">#ist 3 gleich 3?</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>     <span class="co">#ist 4 größer als 5?</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;albert&quot;</span> <span class="op">==</span><span class="st"> &quot;albert&quot;</span>   <span class="co">#ist albert gleich albert vor?</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>R gibt hier entweder <code>TRUE</code> oder <code>FALSE</code> aus, abhängig davon ob der benutzte logische Operator zutrifft oder nicht.</p>
+</div>
+<div id="vektoren-i" class="section level3">
+<h3><span class="header-section-number">2.0.4</span> Vektoren I</h3>
+<p>Vektoren in R sind einfach mehrere Werte die aneinander gebunden werden. Diese können Zahlen aber auch strings (Buchstabenfolgen) sein. Hilfreich dabei ist die <code>c()</code> Funktion (c steht für <em>concatenate</em> = verketten auf Deutsch).</p>
+<p><strong>Beispiele:</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">8</span>)</code></pre></div>
+<pre><code>## [1] 4 1 3 4 8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">8</span>) <span class="co">#definiere Vektor mit den Werten 4, 1, 3, 4 und 8</span>
+
+vektor</code></pre></div>
+<pre><code>## [1] 4 1 3 4 8</code></pre>
+<p>Operatoren können auch ganz einfach mit Vektoren angewandt werden.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor <span class="op">*</span><span class="st"> </span>vektor     <span class="co">#vektor mit sich selbst mal nehmen</span></code></pre></div>
+<pre><code>## [1] 16  1  9 16 64</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor <span class="op">==</span><span class="st"> </span>vektor    <span class="co">#sind alle Werte von vektor gleich alle Werte von vektor?</span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">8</span>) <span class="co">#kommen 4 oder 8 in vektor vor?</span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE FALSE  TRUE  TRUE</code></pre>
+<p><strong>Aufgabe</strong></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Bilde einen Vektor mit dem Namen <code>cm</code> und den folgenden Größen in Zentimeter:</li>
+</ol>
+<ul>
+<li><code>190</code></li>
+<li><code>152</code></li>
+<li><code>174</code></li>
+</ul>
+<p>Teile dann <code>cm</code> durch Hundert um die Größen in Meter zu erhalten!</p>
+<p>Wollen wir auf einen bestimmten Wert in unserem Vektor zugreifen, dann benutzen wir <strong>eckige Klammern</strong> <code>[...]</code> auf die folgende Art und Weise:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor     </code></pre></div>
+<pre><code>## [1] 4 1 3 4 8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor[<span class="dv">3</span>]  <span class="co">#gibt uns das dritte Element von vektor aus</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor[<span class="dv">5</span>]  <span class="co">#gibt uns das fünfte Element von vektor aus</span></code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor[<span class="dv">1</span>] <span class="op">/</span><span class="st"> </span>vektor[<span class="dv">4</span>] <span class="co">#teile die erste Stelle von vektor durch die fünfte Stelle von vektor</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+</div>
+<div id="funktionen" class="section level3">
+<h3><span class="header-section-number">2.0.5</span> Funktionen</h3>
+<p>Das Ziel einer Funktion ist es Daten zu verarbeiten. Dazu gibt es einen <em>input</em> und einen <em>output</em>.</p>
+<p>Definieren wir doch mal eine Funktion, welche Werte die man als <em>input</em> eingibt wieder quadriert als <em>output</em> gibt. Dazu benutzen wir <code>function()</code> und bestimmen dabei die Argumente welche wir jeweils eintippen wollen. Die Funktion selber wird in geschweiften Klammern <code>{}</code> codiert.</p>
+<p><strong>Beispiele:</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quadrieren &lt;-<span class="st"> </span><span class="cf">function</span>(input) { 
+  output &lt;-<span class="st"> </span>input<span class="op">^</span><span class="dv">2</span>        <span class="co">#nehme den input hoch 2 und speichere ihn in output</span>
+  <span class="kw">return</span>(output)                   <span class="co">#gebe output aus</span>
+}
+
+<span class="co">#Funktion ausprobieren!</span>
+<span class="kw">quadrieren</span>(<span class="dv">9</span>)   </code></pre></div>
+<pre><code>## [1] 81</code></pre>
+<p>Wir können auch zwei oder mehrere Argumente zu einer Funktion hinzufügen. Probieren wir das gleiche doch mal mit einer Funktion die jeder aus dem Physik - Unterricht kennen sollte:</p>
+<p><strong>Distanz = Geschwindigkeit * Zeit</strong></p>
+<p><span class="math display">\[Distanz = Geschwindigkeit \times Zeit\]</span></p>
+<p>bzw.</p>
+<p><span class="math display">\[s  = v * t\]</span></p>
+<p><strong>s = v * t</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">distanz &lt;-<span class="st"> </span><span class="cf">function</span>(v, t) {
+ s &lt;-<span class="st"> </span>v <span class="op">*</span><span class="st"> </span>t       <span class="co">#v mal t und definiere deren Ergebnis als s</span>
+ s                <span class="co">#gebe s aus</span>
+}
+
+<span class="co">#Funktion ausprobieren!</span>
+<span class="kw">distanz</span>(<span class="dt">v =</span> <span class="dv">50</span>, <span class="dt">t =</span> <span class="dv">6</span>)</code></pre></div>
+<pre><code>## [1] 300</code></pre>
+<p>Nun müssen wir allerdings nicht immer selber Funktionen definieren. Im Gegenteil! <code>Base R</code> und die vielen Packages haben unzählige Funktionen, die Datenverarbeitung einfach machen. Beispielsweise gibt <code>mean()</code> den Mittelwert eines Vektors aus und <code>sd()</code> gibt die Standardabweichung.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor2 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>
+<span class="kw">mean</span>(vektor2)   <span class="co">#gib den Mittelwert von vektor aus</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(vektor2)     <span class="co">#gib die Standardabweichung von vektor aus</span></code></pre></div>
+<pre><code>## [1] 1.581139</code></pre>
+</div>
+<div id="vektoren-ii" class="section level3">
+<h3><span class="header-section-number">2.0.6</span> Vektoren II</h3>
+<p>Nun eine kleine Übersicht über die Arten von Vektoren:</p>
+<p><strong>Es gibt drei Hauptgruppen</strong></p>
+<ul>
+<li><strong>Character:</strong> aka “String” oder ‘String’, ist einfach nur Text.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">char &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Männlich&quot;</span>, <span class="st">&quot;Weiblich&quot;</span>)
+<span class="kw">class</span>(char)</code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<ul>
+<li><strong>Factor:</strong> Factors können eine Reihenfolge haben sogennante <em>Levels</em>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fac &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;Männlich&quot;</span>, <span class="st">&quot;Weiblich&quot;</span>))
+<span class="kw">class</span>(fac)</code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<ul>
+<li><strong>Numeric:</strong> Jeglicher Zahleninput mit dem man rechnen kann.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">num &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)
+<span class="kw">class</span>(num)</code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<p><strong>Transformation zwischen den Datentypen</strong></p>
+<ul>
+<li><code>as.character()</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.character</span>(num)</code></pre></div>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
+<ul>
+<li><code>as.factor()</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.factor</span>(char)</code></pre></div>
+<pre><code>## [1] Männlich Weiblich
+## Levels: Männlich Weiblich</code></pre>
+<ul>
+<li><code>as.numeric()</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(fac)</code></pre></div>
+<pre><code>## [1] 1 2</code></pre>
+</div>
+<div id="dataframes" class="section level3">
+<h3><span class="header-section-number">2.0.7</span> Dataframes</h3>
+<p>Die meiste Zeit werden wir in R nicht mit Vektoren arbeiten, sondern mit <em>dataframes</em>. Dataframes sind letztendlich einfach nur angeordnete Vektoren und essentiell wichtig für die Datenanalyse.</p>
+<p><strong>Lasst uns mal einen Beispieldatensatz einladen.</strong></p>
+</div>
+<div id="profiles-of-individual-radicalization-in-the-united-states-pirus" class="section level2">
+<h2><span class="header-section-number">2.1</span> Profiles of Individual Radicalization in the United States (PIRUS)</h2>
+<div class="figure">
+<img src="https://start.umd.edu/sites/default/files/logo.png" />
+
+</div>
+<ul>
+<li><a href="https://start.umd.edu/data-tools/profiles-individual-radicalization-united-states-pirus"><strong>Link zum Datensatz</strong></a></li>
+<li><a href="https://start.umd.edu/data-and-tools/start-datasets"><strong>Andere Open Source datasets</strong></a></li>
+</ul>
+<p>Profiles of Individual Radicalization in the United States (PIRUS) ist eine Datenbank mit 1.867 islamistischen, extrem linken und extrem rechten Extremisten, die von 1948 bis 2016 zu gewalttätigem und gewaltfreiem Extremismus in den Vereinigten Staaten radikalisiert haben. Die Datenbank steht auf der START-Webseite kostenlos zum Download zur Verfügung.</p>
+<p>Zunächst laden wir den Datensatz ein</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;start_pirus.Rdata&quot;</span>)</code></pre></div>
+<p>Hier ein kleiner Ausschnitt aus dem Datensatz:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus</code></pre></div>
+<p><strong>Codebook</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Variablen</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>subject_id</td>
+<td>ID der Person</td>
+</tr>
+<tr class="even">
+<td>date</td>
+<td>Datum</td>
+</tr>
+<tr class="odd">
+<td>age</td>
+<td>Alter</td>
+</tr>
+<tr class="even">
+<td>male</td>
+<td>Geschlecht (weiblich/männlich)</td>
+</tr>
+<tr class="odd">
+<td>student</td>
+<td>Student (0/1)</td>
+</tr>
+<tr class="even">
+<td>married</td>
+<td>Verheiratet (0/1)</td>
+</tr>
+<tr class="odd">
+<td>unemployed</td>
+<td>Arbeitslos (0/1)</td>
+</tr>
+<tr class="even">
+<td>mental</td>
+<td>Mentale Probleme (0/1)</td>
+</tr>
+<tr class="odd">
+<td>abuse_child</td>
+<td>Als Kind misshandelt (0/1)</td>
+</tr>
+<tr class="even">
+<td>crime_history</td>
+<td>Kriminelle Vergangenheit (0/1)</td>
+</tr>
+<tr class="odd">
+<td>violent</td>
+<td>Gewalttätiger Plan (0/1)</td>
+</tr>
+<tr class="even">
+<td>extent</td>
+<td>Fortgeschrittenheit Planung (0-5)</td>
+</tr>
+<tr class="odd">
+<td>terror_group</td>
+<td>Gruppe</td>
+</tr>
+<tr class="even">
+<td>radicalization</td>
+<td>Wie stark überzeugt? (1-5)</td>
+</tr>
+<tr class="odd">
+<td>clique</td>
+<td>Extremistische Clique (0/1)</td>
+</tr>
+<tr class="even">
+<td>terror_type</td>
+<td>Ideologie</td>
+</tr>
+</tbody>
+</table>
+<p>Eine Sache fällt dir vielleicht auch auf: das Kürzel <em>NA</em> steht für <em>Not Available</em> und symbolisiert missing values oder fehlende Werte.</p>
+<p><strong>Datenzugriff</strong></p>
+<p>Sehr angenehm kann man auf einzelne Variablen mit Hilfe des Dollarzeichens in der Form <code>data$variable</code> zugegriffen werden.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(start_pirus<span class="op">$</span>terror_group)   <span class="co">#zeige die ersten 5 Stellen von terror_group</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus<span class="op">$</span>terror_group[<span class="dv">1</span>]      <span class="co">#zeige die erste Stelle von terror_group</span></code></pre></div>
+<pre><code>## [1] &quot;al-Qaeda core&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus<span class="op">$</span>terror_group[<span class="dv">250</span>]    <span class="co">#zeige die 250. Stelle von terror_group</span></code></pre></div>
+<pre><code>## [1] &quot;Animal Liberation Front (ALF)&quot;</code></pre>
+<p><strong>Mean</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(start_pirus<span class="op">$</span>age, <span class="dt">na.rm =</span> T)</code></pre></div>
+<pre><code>## [1] 33.61223</code></pre>
+<p><strong>Aufgabe</strong></p>
+<p>Benutze die folgenden Funktionen mit der Variable Alter:</p>
+<ul>
+<li><code>min()</code></li>
+<li><code>max()</code></li>
+<li><code>sd()</code></li>
+<li><code>hist()</code></li>
+</ul>
+<p><strong>Summary</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(start_pirus)</code></pre></div>
+<pre><code>##    subject_id        date                 age             male       
+##  Min.   :1000   Min.   :1948-07-20   Min.   :15.00   Min.   :0.0000  
+##  1st Qu.:3550   1st Qu.:1985-04-15   1st Qu.:24.00   1st Qu.:1.0000  
+##  Median :4562   Median :2002-01-05   Median :30.00   Median :1.0000  
+##  Mean   :4575   Mean   :1997-08-07   Mean   :33.61   Mean   :0.9024  
+##  3rd Qu.:5827   3rd Qu.:2010-10-28   3rd Qu.:41.00   3rd Qu.:1.0000  
+##  Max.   :9411   Max.   :2016-12-23   Max.   :88.00   Max.   :1.0000  
+##                                      NA&#39;s   :83                      
+##      gender         married          student         unemployed   
+##  Min.   :1.000   Min.   :0.0000   Min.   :0.0000   Min.   :0.000  
+##  1st Qu.:2.000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.000  
+##  Median :2.000   Median :0.0000   Median :0.0000   Median :0.000  
+##  Mean   :1.902   Mean   :0.3965   Mean   :0.2453   Mean   :0.104  
+##  3rd Qu.:2.000   3rd Qu.:1.0000   3rd Qu.:0.0000   3rd Qu.:0.000  
+##  Max.   :2.000   Max.   :1.0000   Max.   :1.0000   Max.   :1.000  
+##                  NA&#39;s   :788      NA&#39;s   :805                     
+##      mental        abuse_child          crime_history    violent      
+##  Min.   :0.0000   Min.   :0.00000   None       :611   Min.   :0.0000  
+##  1st Qu.:0.0000   1st Qu.:0.00000   Non-Violent:205   1st Qu.:0.0000  
+##  Median :0.0000   Median :0.00000   Violent    :195   Median :1.0000  
+##  Mean   :0.1019   Mean   :0.05684   NA&#39;s       :854   Mean   :0.5898  
+##  3rd Qu.:0.0000   3rd Qu.:0.00000                     3rd Qu.:1.0000  
+##  Max.   :1.0000   Max.   :3.00000                     Max.   :1.0000  
+##                                                                       
+##      extent      terror_group       radicalization      clique      
+##  Min.   :0.000   Length:1865        Min.   :0.000   Min.   :0.0000  
+##  1st Qu.:0.000   Class :character   1st Qu.:3.000   1st Qu.:0.0000  
+##  Median :1.000   Mode  :character   Median :5.000   Median :1.0000  
+##  Mean   :2.069                      Mean   :3.863   Mean   :0.5179  
+##  3rd Qu.:5.000                      3rd Qu.:5.000   3rd Qu.:1.0000  
+##  Max.   :5.000                      Max.   :5.000   Max.   :1.0000  
+##  NA&#39;s   :27                         NA&#39;s   :193     NA&#39;s   :664     
+##        terror_type       year     
+##  Single Issue:340   Min.   :1948  
+##  Far Left    :324   1st Qu.:1985  
+##  Far Right   :746   Median :2002  
+##  Islamism    :455   Mean   :1997  
+##                     3rd Qu.:2010  
+##                     Max.   :2016  
+## </code></pre>
+<p><strong>Indexieren mit eckigen Klammern</strong></p>
+<p>Wollen wir auf verschiedene Reihen oder Spalten des dataframes zugreifen, können wir das in folgenderweise tun</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus[<span class="dv">1</span>, ]        <span class="co">#1. Reihe</span>
+start_pirus[, <span class="dv">2</span>]        <span class="co">#2. Spalte</span>
+
+start_pirus[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">4</span>]    <span class="co">#die ersten 10 Reihen und die vierte Spalte</span></code></pre></div>
+<p><strong>Aufgabe</strong></p>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Gib die Reihe 1000 von <code>start_pirus</code> aus</p></li>
+<li><p>Gib die Reihe 500 bis 600 und die erste Spalte von <code>start_pirus</code> aus</p></li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["r_intro.pdf", "r_intro.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

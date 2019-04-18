@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 5 Analysis | R Introduction</title>
+  <meta name="description" content="Chapter 5 Analysis | R Introduction">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 5 Analysis | R Introduction" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Analysis | R Introduction" />
+  
+  
+  
+
+<meta name="author" content="Fabio Votta &amp; Simon Roth">
+
+
+<meta name="date" content="2019-04-18">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="ggplot2.html">
+<link rel="next" href="references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="grundlagen.html"><a href="grundlagen.html"><i class="fa fa-check"></i><b>2</b> Grundlagen</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="grundlagen.html"><a href="grundlagen.html#r-als-taschenrechner"><i class="fa fa-check"></i><b>2.0.1</b> R als Taschenrechner</a></li>
+<li class="chapter" data-level="2.0.2" data-path="grundlagen.html"><a href="grundlagen.html#objekte-und-zuweisung"><i class="fa fa-check"></i><b>2.0.2</b> Objekte und Zuweisung</a></li>
+<li class="chapter" data-level="2.0.3" data-path="grundlagen.html"><a href="grundlagen.html#wichtige-operatoren"><i class="fa fa-check"></i><b>2.0.3</b> Wichtige Operatoren</a></li>
+<li class="chapter" data-level="2.0.4" data-path="grundlagen.html"><a href="grundlagen.html#vektoren-i"><i class="fa fa-check"></i><b>2.0.4</b> Vektoren I</a></li>
+<li class="chapter" data-level="2.0.5" data-path="grundlagen.html"><a href="grundlagen.html#funktionen"><i class="fa fa-check"></i><b>2.0.5</b> Funktionen</a></li>
+<li class="chapter" data-level="2.0.6" data-path="grundlagen.html"><a href="grundlagen.html#vektoren-ii"><i class="fa fa-check"></i><b>2.0.6</b> Vektoren II</a></li>
+<li class="chapter" data-level="2.0.7" data-path="grundlagen.html"><a href="grundlagen.html#dataframes"><i class="fa fa-check"></i><b>2.0.7</b> Dataframes</a></li>
+<li class="chapter" data-level="2.1" data-path="grundlagen.html"><a href="grundlagen.html#profiles-of-individual-radicalization-in-the-united-states-pirus"><i class="fa fa-check"></i><b>2.1</b> Profiles of Individual Radicalization in the United States (PIRUS)</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>3</b> Tidyverse</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="tidyverse.html"><a href="tidyverse.html#mutate"><i class="fa fa-check"></i><b>3.0.1</b> mutate</a></li>
+<li class="chapter" data-level="3.0.2" data-path="tidyverse.html"><a href="tidyverse.html#ifelse"><i class="fa fa-check"></i><b>3.0.2</b> ifelse</a></li>
+<li class="chapter" data-level="3.0.3" data-path="tidyverse.html"><a href="tidyverse.html#case_when"><i class="fa fa-check"></i><b>3.0.3</b> case_when</a></li>
+<li class="chapter" data-level="3.0.4" data-path="tidyverse.html"><a href="tidyverse.html#select"><i class="fa fa-check"></i><b>3.0.4</b> select</a></li>
+<li class="chapter" data-level="3.0.5" data-path="tidyverse.html"><a href="tidyverse.html#filter"><i class="fa fa-check"></i><b>3.0.5</b> filter</a></li>
+<li class="chapter" data-level="3.0.6" data-path="tidyverse.html"><a href="tidyverse.html#rename"><i class="fa fa-check"></i><b>3.0.6</b> rename</a></li>
+<li class="chapter" data-level="3.0.7" data-path="tidyverse.html"><a href="tidyverse.html#pipe"><i class="fa fa-check"></i><b>3.0.7</b> Pipe %&gt;%</a></li>
+<li class="chapter" data-level="3.0.8" data-path="tidyverse.html"><a href="tidyverse.html#variablen-auspragungen-zahlen-mit-count-tabyl-und-tally"><i class="fa fa-check"></i><b>3.0.8</b> Variablen(-ausprägungen) zählen mit <code>count</code>, <code>tabyl</code> und <code>tally</code></a></li>
+<li class="chapter" data-level="3.0.9" data-path="tidyverse.html"><a href="tidyverse.html#group_by-summary"><i class="fa fa-check"></i><b>3.0.9</b> group_by + summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>4</b> <code>ggplot2</code></a><ul>
+<li class="chapter" data-level="4.1" data-path="ggplot2.html"><a href="ggplot2.html#zwei-funktionen-von-datenvisualisierungen"><i class="fa fa-check"></i><b>4.1</b> Zwei Funktionen von Datenvisualisierungen</a></li>
+<li class="chapter" data-level="4.2" data-path="ggplot2.html"><a href="ggplot2.html#grammar-of-graphics"><i class="fa fa-check"></i><b>4.2</b> Grammar of Graphics</a></li>
+<li class="chapter" data-level="4.3" data-path="ggplot2.html"><a href="ggplot2.html#die-evolution-einer-grafik"><i class="fa fa-check"></i><b>4.3</b> Die Evolution einer Grafik</a></li>
+<li class="chapter" data-level="4.4" data-path="ggplot2.html"><a href="ggplot2.html#welche-geoms-gibts-es"><i class="fa fa-check"></i><b>4.4</b> Welche Geoms gibts es?</a></li>
+<li class="chapter" data-level="4.5" data-path="ggplot2.html"><a href="ggplot2.html#farben"><i class="fa fa-check"></i><b>4.5</b> Farben</a></li>
+<li class="chapter" data-level="4.6" data-path="ggplot2.html"><a href="ggplot2.html#plot-theming"><i class="fa fa-check"></i><b>4.6</b> Plot Theming</a></li>
+<li class="chapter" data-level="4.7" data-path="ggplot2.html"><a href="ggplot2.html#some-informative-plots"><i class="fa fa-check"></i><b>4.7</b> Some Informative Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>5</b> Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="analysis.html"><a href="analysis.html#packages"><i class="fa fa-check"></i><b>5.1</b> Packages</a></li>
+<li class="chapter" data-level="5.2" data-path="analysis.html"><a href="analysis.html#load-data"><i class="fa fa-check"></i><b>5.2</b> Load Data</a></li>
+<li class="chapter" data-level="5.3" data-path="analysis.html"><a href="analysis.html#lineare-regression"><i class="fa fa-check"></i><b>5.3</b> Lineare Regression</a></li>
+<li class="chapter" data-level="5.4" data-path="analysis.html"><a href="analysis.html#logistische-regression"><i class="fa fa-check"></i><b>5.4</b> Logistische Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Introduction</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analysis" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Analysis</h1>
+<style type="text/css">
+@import url("https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css");
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js"></script>
+<div class="ui raised segment">
+<p>
+Dieser Notebook repliziert einen Research Report vom Januar 2018 zu Gewalt von extremistischen Straftätern. Die Daten sind frei zugänglich <a href="https://start.umd.edu/data-and-tools/start-datasets">hier</a>. Der Report welchen wir replizieren ist <a href="https://www.start.umd.edu/pubs/START_PIRUS_PreRadCriminalActivityofUSExtremists_Jan2018.pdf">hier</a> hinterlegt und trägt den Titel: <em>Pre-Radicalization Criminal Activity of United States Extremists</em>
+</p>
+</div>
+<div id="packages" class="section level2">
+<h2><span class="header-section-number">5.1</span> Packages</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pacman<span class="op">::</span><span class="kw">p_load</span>(tidyverse, janitor, ggthemes, texreg, sjPlot)</code></pre></div>
+</div>
+<div id="load-data" class="section level2">
+<h2><span class="header-section-number">5.2</span> Load Data</h2>
+<div class="row">
+<div class="ui secondary menu">
+<div class="active item" data-tab="glimpse">
+Glimpse
+</div>
+<div class="item" data-tab="code">
+Code
+</div>
+</div>
+</div>
+<div class="row">
+<div class="ui tab" data-tab="code">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">recode_missings &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  <span class="kw">ifelse</span>(x <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">88</span>, <span class="op">-</span><span class="dv">99</span>), <span class="ot">NA</span>, x)
+}
+
+start_pirus &lt;-<span class="st"> </span>openxlsx<span class="op">::</span><span class="kw">read.xlsx</span>(<span class="st">&quot;start_pirus_2018.xlsx&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>janitor<span class="op">::</span><span class="kw">clean_names</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_all</span>(recode_missings)  <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">terror_type =</span> <span class="kw">case_when</span>(
+      radicalization_islamist <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Islamism&quot;</span>,
+      radicalization_far_right <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Far Right&quot;</span>,
+      radicalization_far_left <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Far Left&quot;</span>,
+      radicalization_single_issue <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Single Issue&quot;</span>
+    ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span>forcats<span class="op">::</span><span class="kw">fct_relevel</span>(<span class="st">&quot;Single Issue&quot;</span>)
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">unemployed =</span> <span class="kw">ifelse</span>(employment_status <span class="op">%in%</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">married =</span> <span class="kw">ifelse</span>(marital_status <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">male =</span> <span class="kw">ifelse</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mental =</span> <span class="kw">ifelse</span>(psychological <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">crime_history =</span> <span class="kw">case_when</span>(
+      previous_criminal_activity <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">~</span><span class="st"> &quot;None&quot;</span>,
+      previous_criminal_activity <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Non-Violent&quot;</span>,
+      previous_criminal_activity <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> &quot;Non-Violent&quot;</span>,
+      previous_criminal_activity <span class="op">==</span><span class="st"> </span><span class="dv">3</span> <span class="op">~</span><span class="st"> &quot;Violent&quot;</span>
+    ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span>forcats<span class="op">::</span><span class="kw">fct_relevel</span>(<span class="st">&quot;None&quot;</span>)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">as.Date</span>(date_exposure, <span class="dt">origin =</span> <span class="st">&quot;1899-12-30&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(
+    subject_id, 
+    date,
+    age, 
+    male, 
+    gender,
+    married,
+    student, 
+    unemployed,
+    mental,
+    abuse_child, 
+    crime_history, 
+    violent,
+    <span class="dt">extent =</span> extent_plot, 
+    <span class="dt">terror_group =</span> terrorist_group_name1,
+    <span class="dt">radicalization =</span> radical_beliefs,
+    clique,
+    terror_type
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">as.Date</span>(date, <span class="dt">origin =</span> <span class="st">&quot;1899-12-30&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#origin=&quot;1970-01-01&quot;)) %&gt;%   </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year =</span> lubridate<span class="op">::</span><span class="kw">year</span>(date))
+
+<span class="co">#save(start_pirus, file = &quot;start_pirus.Rdata&quot;)</span></code></pre></div>
+</div>
+<div class="ui active tab" data-tab="glimpse">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;start_pirus.Rdata&quot;</span>)
+start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>glimpse</code></pre></div>
+<pre><code>## Observations: 1,865
+## Variables: 18
+## $ subject_id     &lt;dbl&gt; 1000, 1001, 1002, 1005, 1006, 1010, 1013, 1014, 1…
+## $ date           &lt;date&gt; 2002-05-08, 2001-11-25, 1997-05-01, 1993-04-10, …
+## $ age            &lt;dbl&gt; 32, 20, 28, 25, 25, 27, 23, 28, 26, 25, 25, 24, 3…
+## $ male           &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ gender         &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2…
+## $ married        &lt;dbl&gt; 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0…
+## $ student        &lt;dbl&gt; 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NA, 1, 0, 0, …
+## $ unemployed     &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0…
+## $ mental         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0…
+## $ abuse_child    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ crime_history  &lt;fct&gt; Violent, None, Violent, None, NA, NA, Non-Violent…
+## $ violent        &lt;dbl&gt; 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ extent         &lt;dbl&gt; 2, 0, NA, 5, 5, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, …
+## $ terror_group   &lt;chr&gt; &quot;al-Qaeda core&quot;, &quot;Taliban&quot;, &quot;al-Qaeda core&quot;, NA, …
+## $ radicalization &lt;dbl&gt; 4, 5, 5, 5, 5, 5, 2, 2, NA, 2, 5, 3, 2, 5, 5, 5, …
+## $ clique         &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, NA, 1, 1, 1, …
+## $ terror_type    &lt;fct&gt; Islamism, Islamism, Islamism, Islamism, Islamism,…
+## $ year           &lt;dbl&gt; 2002, 2001, 1997, 1993, 1993, 2003, 2002, 2002, 2…</code></pre>
+</div>
+</div>
+<!-- JAVASCRIPT TRIGGER -->
+<script>
+$('.secondary.menu .item').tab();
+</script>
+</div>
+<div id="lineare-regression" class="section level2">
+<h2><span class="header-section-number">5.3</span> Lineare Regression</h2>
+<p>Eine lineare Regression wird auf folgende Weise durchgeführt:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(extent <span class="op">~</span><span class="st"> </span>radicalization, <span class="dt">data =</span> start_pirus) </code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = extent ~ radicalization, data = start_pirus)
+## 
+## Coefficients:
+##    (Intercept)  radicalization  
+##         1.6413          0.1233</code></pre>
+<p>Genauso wie alles andere in R können wir auch eine lineare Regression in ein Objekt packen:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(extent <span class="op">~</span><span class="st"> </span>radicalization, <span class="dt">data =</span> start_pirus) 
+
+model1</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = extent ~ radicalization, data = start_pirus)
+## 
+## Coefficients:
+##    (Intercept)  radicalization  
+##         1.6413          0.1233</code></pre>
+<p>Die lineare Regression in ein Objekt zu packen hilft uns dabei die Resultate der Regression näher unter die Lupe zu nehmen.</p>
+<p><code>screenreg</code> aus dem <code>texreg</code> package gibt uns eine schöne Regressiontabelle aus:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">htmlreg</span>(model1) <span class="op">%&gt;%</span><span class="st"> </span>shiny<span class="op">::</span><span class="kw">HTML</span>(.)</code></pre></div>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<table cellspacing="0" align="center" style="border: none;">
+<caption align="bottom" style="margin-top:0.3em;">Statistical models</caption>
+<tr>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;"><b></b></th>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;"><b>Model 1</b></th>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">(Intercept)</td>
+<td style="padding-right: 12px; border: none;">1.64<sup style="vertical-align: 0px;">***</sup></td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">(0.15)</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">radicalization</td>
+<td style="padding-right: 12px; border: none;">0.12<sup style="vertical-align: 0px;">***</sup></td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">(0.04)</td>
+</tr>
+<tr>
+<td style="border-top: 1px solid black;">R<sup style="vertical-align: 0px;">2</sup></td>
+<td style="border-top: 1px solid black;">0.01</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">Adj. R<sup style="vertical-align: 0px;">2</sup></td>
+<td style="padding-right: 12px; border: none;">0.01</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">Num. obs.</td>
+<td style="padding-right: 12px; border: none;">1651</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid black;">RMSE</td>
+<td style="border-bottom: 2px solid black;">2.19</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;" colspan="3"><span style="font-size:0.8em"><sup style="vertical-align: 0px;">***</sup>p &lt; 0.001, <sup style="vertical-align: 0px;">**</sup>p &lt; 0.01, <sup style="vertical-align: 0px;">*</sup>p &lt; 0.05</span></td>
+</tr>
+</table>
+
+<p><strong>Aufgabe</strong></p>
+<p>Versucht einmal eine Regresion durchzuführen in der ihr <code>extent</code> (AV) mit <code>crime_history</code> (UV) versucht zu erklären.</p>
+<p>Als nächstes wollen wir eine kleine Analyse gemeinsam ausführen. Ziel ist es zu erklären wie sich der Radikalisierungsgrad (<em>radicalization</em>) einer Person auf die Fortgeschrittenheit der Planung einer extremistischen Tat (<em>extent</em>) auswirkt. Dazu nehmen wir auch einig Kontrolle heran:</p>
+<ul>
+<li><code>abuse_child</code></li>
+<li><code>crime_history</code></li>
+<li><code>age</code></li>
+<li><code>male</code></li>
+</ul>
+<p><em>1. Schritt: eigenen Datensatz für die Analyse erstellen und alle NAs (missing values) rauswerfen (<code>drop_na</code>)</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_lm &lt;-<span class="st"> </span>start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">drop_na</span>(radicalization, age, male, abuse_child, crime_history)</code></pre></div>
+<p><code>drop_na</code> entfernt alle Fälle welche in den obigen Variablen ein NA haben</p>
+<p><em>2. Schritt: Bauen wir ein sequentielles Modell</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1 &lt;-<span class="st">  </span><span class="kw">lm</span>(extent <span class="op">~</span><span class="st"> </span>radicalization, <span class="dt">data =</span> start_lm) 
+
+model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(extent <span class="op">~</span><span class="st">  </span>radicalization <span class="op">+</span><span class="st"> </span>abuse_child <span class="op">+</span><span class="st"> </span>crime_history, <span class="dt">data =</span> start_lm) 
+
+model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(extent <span class="op">~</span><span class="st">  </span>radicalization <span class="op">+</span><span class="st"> </span>abuse_child <span class="op">+</span><span class="st"> </span>crime_history <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>male, <span class="dt">data =</span> start_lm) </code></pre></div>
+<p><em>3. Schritt: Resultate darstellen</em></p>
+<p><code>screenreg</code> erlaubt es uns auch mit <code>list</code> mehrere Modelle zu übergeben:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">htmlreg</span>(<span class="kw">list</span>(model1, model2, model3)) <span class="op">%&gt;%</span><span class="st"> </span>shiny<span class="op">::</span><span class="kw">HTML</span>(.)</code></pre></div>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<table cellspacing="0" align="center" style="border: none;">
+<caption align="bottom" style="margin-top:0.3em;">Statistical models</caption>
+<tr>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;"><b></b></th>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;"><b>Model 1</b></th>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;"><b>Model 2</b></th>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;"><b>Model 3</b></th>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">(Intercept)</td>
+<td style="padding-right: 12px; border: none;">1.76<sup style="vertical-align: 0px;">***</sup></td>
+<td style="padding-right: 12px; border: none;">1.59<sup style="vertical-align: 0px;">***</sup></td>
+<td style="padding-right: 12px; border: none;">2.27<sup style="vertical-align: 0px;">***</sup></td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">(0.20)</td>
+<td style="padding-right: 12px; border: none;">(0.21)</td>
+<td style="padding-right: 12px; border: none;">(0.33)</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">radicalization</td>
+<td style="padding-right: 12px; border: none;">0.10<sup style="vertical-align: 0px;">*</sup></td>
+<td style="padding-right: 12px; border: none;">0.09</td>
+<td style="padding-right: 12px; border: none;">0.11<sup style="vertical-align: 0px;">*</sup></td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">(0.05)</td>
+<td style="padding-right: 12px; border: none;">(0.05)</td>
+<td style="padding-right: 12px; border: none;">(0.05)</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">abuse_child</td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">0.41<sup style="vertical-align: 0px;">*</sup></td>
+<td style="padding-right: 12px; border: none;">0.36<sup style="vertical-align: 0px;">*</sup></td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">(0.17)</td>
+<td style="padding-right: 12px; border: none;">(0.17)</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">crime_historyNon-Violent</td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">0.02</td>
+<td style="padding-right: 12px; border: none;">0.13</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">(0.18)</td>
+<td style="padding-right: 12px; border: none;">(0.19)</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">crime_historyViolent</td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">0.84<sup style="vertical-align: 0px;">***</sup></td>
+<td style="padding-right: 12px; border: none;">0.91<sup style="vertical-align: 0px;">***</sup></td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">(0.19)</td>
+<td style="padding-right: 12px; border: none;">(0.19)</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">age</td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">-0.02<sup style="vertical-align: 0px;">***</sup></td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">(0.01)</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">male</td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">-0.09</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">(0.24)</td>
+</tr>
+<tr>
+<td style="border-top: 1px solid black;">R<sup style="vertical-align: 0px;">2</sup></td>
+<td style="border-top: 1px solid black;">0.00</td>
+<td style="border-top: 1px solid black;">0.03</td>
+<td style="border-top: 1px solid black;">0.05</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">Adj. R<sup style="vertical-align: 0px;">2</sup></td>
+<td style="padding-right: 12px; border: none;">0.00</td>
+<td style="padding-right: 12px; border: none;">0.03</td>
+<td style="padding-right: 12px; border: none;">0.04</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">Num. obs.</td>
+<td style="padding-right: 12px; border: none;">913</td>
+<td style="padding-right: 12px; border: none;">913</td>
+<td style="padding-right: 12px; border: none;">913</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid black;">RMSE</td>
+<td style="border-bottom: 2px solid black;">2.18</td>
+<td style="border-bottom: 2px solid black;">2.15</td>
+<td style="border-bottom: 2px solid black;">2.14</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;" colspan="5"><span style="font-size:0.8em"><sup style="vertical-align: 0px;">***</sup>p &lt; 0.001, <sup style="vertical-align: 0px;">**</sup>p &lt; 0.01, <sup style="vertical-align: 0px;">*</sup>p &lt; 0.05</span></td>
+</tr>
+</table>
+
+<p><em>4. Schritt: Resultate visualisieren</em></p>
+<p>Mit der <code>plot_model</code> Funktion aus dem <code>sjPlot</code> package können wir uns auch so genannte <em>coefficient plots</em> ausgeben lassen</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model3 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">plot_model</span>(<span class="dt">show.p =</span> T, <span class="dt">show.values =</span> T, <span class="dt">sort.est =</span> T)</code></pre></div>
+<p><img src="r_intro_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Aber auch die Regressionsgerade:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model3 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">plot_model</span>(<span class="dt">terror_type =</span> <span class="st">&quot;pred&quot;</span>, <span class="dt">terms =</span> <span class="st">&quot;radicalization&quot;</span>)</code></pre></div>
+<p><img src="r_intro_files/figure-html/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Diesen Effekt können wir auch weiter aufteilen nach krimineller Vergangenheit:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model3 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">plot_model</span>(<span class="dt">terror_type =</span> <span class="st">&quot;pred&quot;</span>, <span class="dt">terms =</span> <span class="kw">c</span>(<span class="st">&quot;radicalization&quot;</span>, <span class="st">&quot;crime_history&quot;</span>))</code></pre></div>
+<p><img src="r_intro_files/figure-html/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="logistische-regression" class="section level2">
+<h2><span class="header-section-number">5.4</span> Logistische Regression</h2>
+<p>Auch logistische Regression können einfach geschätzt werden. Hier ein weiteres Modell, bei dem wir versuchen werden zu erklären wann ein Extremist Gewalt anwendet (<em>violent</em>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glm1 &lt;-<span class="st"> </span><span class="kw">glm</span>(violent <span class="op">~</span><span class="st"> </span>unemployed <span class="op">+</span><span class="st"> </span>married <span class="op">+</span><span class="st"> </span>
+<span class="st">              </span>age <span class="op">+</span><span class="st"> </span>male <span class="op">+</span><span class="st"> </span>mental <span class="op">+</span><span class="st"> </span>
+<span class="st">              </span>crime_history <span class="op">+</span><span class="st"> </span>clique <span class="op">+</span><span class="st"> </span>radicalization, 
+            <span class="dt">data =</span> start_lm, 
+            <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
+
+<span class="kw">summary</span>(glm1)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = violent ~ unemployed + married + age + male + mental + 
+##     crime_history + clique + radicalization, family = &quot;binomial&quot;, 
+##     data = start_lm)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.3773  -1.1011   0.6552   0.8607   1.6985  
+## 
+## Coefficients:
+##                           Estimate Std. Error z value Pr(&gt;|z|)   
+## (Intercept)               0.432772   0.450618   0.960  0.33686   
+## unemployed                0.340880   0.273353   1.247  0.21239   
+## married                  -0.689700   0.222214  -3.104  0.00191 **
+## age                      -0.025707   0.008511  -3.020  0.00252 **
+## male                      0.802934   0.315057   2.549  0.01082 * 
+## mental                    0.601743   0.283416   2.123  0.03374 * 
+## crime_historyNon-Violent  0.470860   0.271657   1.733  0.08304 . 
+## crime_historyViolent      0.868966   0.303334   2.865  0.00417 **
+## clique                    0.494463   0.204939   2.413  0.01583 * 
+## radicalization            0.026425   0.068709   0.385  0.70054   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 679.59  on 540  degrees of freedom
+## Residual deviance: 614.38  on 531  degrees of freedom
+##   (379 observations deleted due to missingness)
+## AIC: 634.38
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p>Mit der <code>plot_model</code> Funktion aus dem <code>sjPlot</code> package können wir uns auch so genannte <em>coefficient plots</em> ausgeben lassen</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glm1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">plot_model</span>(<span class="dt">show.p =</span> T, <span class="dt">show.values =</span> T, <span class="dt">sort.est =</span> T)  <span class="op">+</span>
+<span class="st">  </span>ggthemes<span class="op">::</span><span class="kw">theme_hc</span>() <span class="op">+</span>
+<span class="st">  </span>ggthemes<span class="op">::</span><span class="kw">scale_colour_hc</span>()</code></pre></div>
+<pre><code>## Scale for &#39;colour&#39; is already present. Adding another scale for
+## &#39;colour&#39;, which will replace the existing scale.</code></pre>
+<p><img src="r_intro_files/figure-html/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><strong>Vorhergesagte Wahrscheinlichkeit für kriminelle Vergangenheit</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sjPlot)
+glm1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">plot_model</span>(<span class="dt">terror_type =</span> <span class="st">&quot;eff&quot;</span>, <span class="dt">terms =</span> <span class="st">&quot;crime_historyViolent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span>ggthemes<span class="op">::</span><span class="kw">scale_colour_gdocs</span>() <span class="op">+</span>
+<span class="st">  </span>ggthemes<span class="op">::</span><span class="kw">theme_gdocs</span>()</code></pre></div>
+<pre><code>## Scale for &#39;colour&#39; is already present. Adding another scale for
+## &#39;colour&#39;, which will replace the existing scale.</code></pre>
+<p><img src="r_intro_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><strong>Vorhergesagte Wahrscheinlichkeit für kriminelle Vergangenheit und Beziehungssatus</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glm1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">plot_model</span>(<span class="dt">terror_type =</span> <span class="st">&quot;eff&quot;</span>, <span class="dt">terms =</span> <span class="kw">c</span>(<span class="st">&quot;crime_historyViolent&quot;</span>, <span class="st">&quot;married&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span>ggthemes<span class="op">::</span><span class="kw">theme_fivethirtyeight</span>() <span class="op">+</span>
+<span class="st">  </span>ggthemes<span class="op">::</span><span class="kw">scale_colour_fivethirtyeight</span>()</code></pre></div>
+<pre><code>## Scale for &#39;colour&#39; is already present. Adding another scale for
+## &#39;colour&#39;, which will replace the existing scale.</code></pre>
+<p><img src="r_intro_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><strong>Vorhergesagte Wahrscheinlichkeit für kriminelle Vergangenheit und Familienstatus</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glm1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">plot_model</span>(<span class="dt">terror_type =</span> <span class="st">&quot;eff&quot;</span>, <span class="dt">terms =</span> <span class="kw">c</span>(<span class="st">&quot;crime_historyViolent&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;married&quot;</span>))</code></pre></div>
+<p><img src="r_intro_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ggplot2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["r_intro.pdf", "r_intro.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

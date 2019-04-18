@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 4 ggplot2 | R Introduction</title>
+  <meta name="description" content="Chapter 4 ggplot2 | R Introduction">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 4 ggplot2 | R Introduction" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 ggplot2 | R Introduction" />
+  
+  
+  
+
+<meta name="author" content="Fabio Votta &amp; Simon Roth">
+
+
+<meta name="date" content="2019-04-18">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="tidyverse.html">
+<link rel="next" href="analysis.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="grundlagen.html"><a href="grundlagen.html"><i class="fa fa-check"></i><b>2</b> Grundlagen</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="grundlagen.html"><a href="grundlagen.html#r-als-taschenrechner"><i class="fa fa-check"></i><b>2.0.1</b> R als Taschenrechner</a></li>
+<li class="chapter" data-level="2.0.2" data-path="grundlagen.html"><a href="grundlagen.html#objekte-und-zuweisung"><i class="fa fa-check"></i><b>2.0.2</b> Objekte und Zuweisung</a></li>
+<li class="chapter" data-level="2.0.3" data-path="grundlagen.html"><a href="grundlagen.html#wichtige-operatoren"><i class="fa fa-check"></i><b>2.0.3</b> Wichtige Operatoren</a></li>
+<li class="chapter" data-level="2.0.4" data-path="grundlagen.html"><a href="grundlagen.html#vektoren-i"><i class="fa fa-check"></i><b>2.0.4</b> Vektoren I</a></li>
+<li class="chapter" data-level="2.0.5" data-path="grundlagen.html"><a href="grundlagen.html#funktionen"><i class="fa fa-check"></i><b>2.0.5</b> Funktionen</a></li>
+<li class="chapter" data-level="2.0.6" data-path="grundlagen.html"><a href="grundlagen.html#vektoren-ii"><i class="fa fa-check"></i><b>2.0.6</b> Vektoren II</a></li>
+<li class="chapter" data-level="2.0.7" data-path="grundlagen.html"><a href="grundlagen.html#dataframes"><i class="fa fa-check"></i><b>2.0.7</b> Dataframes</a></li>
+<li class="chapter" data-level="2.1" data-path="grundlagen.html"><a href="grundlagen.html#profiles-of-individual-radicalization-in-the-united-states-pirus"><i class="fa fa-check"></i><b>2.1</b> Profiles of Individual Radicalization in the United States (PIRUS)</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>3</b> Tidyverse</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="tidyverse.html"><a href="tidyverse.html#mutate"><i class="fa fa-check"></i><b>3.0.1</b> mutate</a></li>
+<li class="chapter" data-level="3.0.2" data-path="tidyverse.html"><a href="tidyverse.html#ifelse"><i class="fa fa-check"></i><b>3.0.2</b> ifelse</a></li>
+<li class="chapter" data-level="3.0.3" data-path="tidyverse.html"><a href="tidyverse.html#case_when"><i class="fa fa-check"></i><b>3.0.3</b> case_when</a></li>
+<li class="chapter" data-level="3.0.4" data-path="tidyverse.html"><a href="tidyverse.html#select"><i class="fa fa-check"></i><b>3.0.4</b> select</a></li>
+<li class="chapter" data-level="3.0.5" data-path="tidyverse.html"><a href="tidyverse.html#filter"><i class="fa fa-check"></i><b>3.0.5</b> filter</a></li>
+<li class="chapter" data-level="3.0.6" data-path="tidyverse.html"><a href="tidyverse.html#rename"><i class="fa fa-check"></i><b>3.0.6</b> rename</a></li>
+<li class="chapter" data-level="3.0.7" data-path="tidyverse.html"><a href="tidyverse.html#pipe"><i class="fa fa-check"></i><b>3.0.7</b> Pipe %&gt;%</a></li>
+<li class="chapter" data-level="3.0.8" data-path="tidyverse.html"><a href="tidyverse.html#variablen-auspragungen-zahlen-mit-count-tabyl-und-tally"><i class="fa fa-check"></i><b>3.0.8</b> Variablen(-ausprägungen) zählen mit <code>count</code>, <code>tabyl</code> und <code>tally</code></a></li>
+<li class="chapter" data-level="3.0.9" data-path="tidyverse.html"><a href="tidyverse.html#group_by-summary"><i class="fa fa-check"></i><b>3.0.9</b> group_by + summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>4</b> <code>ggplot2</code></a><ul>
+<li class="chapter" data-level="4.1" data-path="ggplot2.html"><a href="ggplot2.html#zwei-funktionen-von-datenvisualisierungen"><i class="fa fa-check"></i><b>4.1</b> Zwei Funktionen von Datenvisualisierungen</a></li>
+<li class="chapter" data-level="4.2" data-path="ggplot2.html"><a href="ggplot2.html#grammar-of-graphics"><i class="fa fa-check"></i><b>4.2</b> Grammar of Graphics</a></li>
+<li class="chapter" data-level="4.3" data-path="ggplot2.html"><a href="ggplot2.html#die-evolution-einer-grafik"><i class="fa fa-check"></i><b>4.3</b> Die Evolution einer Grafik</a></li>
+<li class="chapter" data-level="4.4" data-path="ggplot2.html"><a href="ggplot2.html#welche-geoms-gibts-es"><i class="fa fa-check"></i><b>4.4</b> Welche Geoms gibts es?</a></li>
+<li class="chapter" data-level="4.5" data-path="ggplot2.html"><a href="ggplot2.html#farben"><i class="fa fa-check"></i><b>4.5</b> Farben</a></li>
+<li class="chapter" data-level="4.6" data-path="ggplot2.html"><a href="ggplot2.html#plot-theming"><i class="fa fa-check"></i><b>4.6</b> Plot Theming</a></li>
+<li class="chapter" data-level="4.7" data-path="ggplot2.html"><a href="ggplot2.html#some-informative-plots"><i class="fa fa-check"></i><b>4.7</b> Some Informative Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>5</b> Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="analysis.html"><a href="analysis.html#packages"><i class="fa fa-check"></i><b>5.1</b> Packages</a></li>
+<li class="chapter" data-level="5.2" data-path="analysis.html"><a href="analysis.html#load-data"><i class="fa fa-check"></i><b>5.2</b> Load Data</a></li>
+<li class="chapter" data-level="5.3" data-path="analysis.html"><a href="analysis.html#lineare-regression"><i class="fa fa-check"></i><b>5.3</b> Lineare Regression</a></li>
+<li class="chapter" data-level="5.4" data-path="analysis.html"><a href="analysis.html#logistische-regression"><i class="fa fa-check"></i><b>5.4</b> Logistische Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Introduction</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ggplot2" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> <code>ggplot2</code></h1>
+<style type="text/css">
+@import url("https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css");
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js"></script>
+<p><img src="images/ggplot2.png" width = "20%></p>
+<div id="zwei-funktionen-von-datenvisualisierungen" class="section level2">
+<h2><span class="header-section-number">4.1</span> Zwei Funktionen von Datenvisualisierungen</h2>
+<blockquote>
+<p>“The simple graph has brought more information to the data analyst’s mind than any other device.” — John Tukey</p>
+</blockquote>
+<ul>
+<li>unterschied Exploratory Data Viz vs. Publication Ready Data Viz</li>
+</ul>
+<p><strong>Additional Sources</strong></p>
+<ul>
+<li><a href="https://uc-r.github.io/ggplot_intro">An Introduction to ggplot2 (UC)</a></li>
+</ul>
+</div>
+<div id="grammar-of-graphics" class="section level2">
+<h2><span class="header-section-number">4.2</span> Grammar of Graphics</h2>
+<ul>
+<li>A grammar of a language defines the rules of structuring words and phrases into meaningful expressions.</li>
+<li>A grammar of graphics defines the rules of structuring mathematic and aesthetic elements into a meaningful graph.</li>
+<li>allows the user to build a graph from concepts rather than recall of commands and options.</li>
+</ul>
+<p>Leland Wilkinson (2005) designed the grammar upon which ggplot2 is based.</p>
+<p><br></p>
+<div class="ui large centered images">
+<p><img src="images/ggplot2_internals.png"> <img src="images/grammer_of_graphics.png"></p>
+</div>
+<ul>
+<li><a href="https://gallery.shinyapps.io/ggtree/" class="uri">https://gallery.shinyapps.io/ggtree/</a></li>
+</ul>
+<p><br></p>
+</div>
+<div id="die-evolution-einer-grafik" class="section level2">
+<h2><span class="header-section-number">4.3</span> Die Evolution einer Grafik</h2>
+<p>Klicke schrittweise auf die Tabs um den Aufbau einer Grafik angefangen bei den Daten zu verdeutlichen.</p>
+<div class="tab demo">
+<div class="ui secondary menu">
+<div class="active item" data-tab="gg_data">
+Data
+</div>
+<div class="item" data-tab="gg_body">
+Body
+</div>
+<div class="item" data-tab="gg_aes">
+Aesthetic
+</div>
+<div class="item" data-tab="gg_geom">
+Geom
+</div>
+<div class="item" data-tab="gg_fill">
+Fill
+</div>
+<div class="item" data-tab="gg_alpha">
+Alpha
+</div>
+<div class="item" data-tab="gg_labs">
+Labs
+</div>
+<div class="item" data-tab="gg_facet">
+Facets
+</div>
+<div class="item" data-tab="gg_theme">
+Facets
+</div>
+</div>
+<p><br></p>
+<div class="ui active tab" data-tab="gg_data">
+<div class="ui stackable grid">
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus</code></pre></div>
+<p>Am Anfang steht bei ggplot immer ein Dataframe. Idealerweise wurden alle Datentransformationen bereits vor der Erstellung des Plots durchgeführt. Wenn ein Plot mal nicht funktioniert wird in 95% der Fälle etwas mit den Daten oder deren Format nicht stimmen. Deshalb ist es wichtig die Daten und deren Struktur zu verstehen.</p>
+</div>
+<div class="eight wide column">
+<pre><code>## Observations: 5
+## Variables: 18
+## $ subject_id     &lt;dbl&gt; 1000, 1001, 1002, 1005, 1006
+## $ date           &lt;date&gt; 2002-05-08, 2001-11-25, 1997-05-01, 1993-04-10, …
+## $ age            &lt;dbl&gt; 32, 20, 28, 25, 25
+## $ male           &lt;dbl&gt; 1, 1, 1, 1, 1
+## $ gender         &lt;dbl&gt; 2, 2, 2, 2, 2
+## $ married        &lt;dbl&gt; 1, 0, 1, 1, 0
+## $ student        &lt;dbl&gt; 1, 1, 0, 0, 0
+## $ unemployed     &lt;dbl&gt; 0, 0, 0, 0, 0
+## $ mental         &lt;dbl&gt; 0, 0, 0, 0, 0
+## $ abuse_child    &lt;dbl&gt; 0, 0, 0, 0, 0
+## $ crime_history  &lt;fct&gt; Violent, None, Violent, None, NA
+## $ violent        &lt;chr&gt; &quot;Violent&quot;, &quot;None-Violent&quot;, &quot;None-Violent&quot;, &quot;Viole…
+## $ extent         &lt;dbl&gt; 2, 0, NA, 5, 5
+## $ terror_group   &lt;chr&gt; &quot;al-Qaeda core&quot;, &quot;Taliban&quot;, &quot;al-Qaeda core&quot;, NA, …
+## $ radicalization &lt;dbl&gt; 4, 5, 5, 5, 5
+## $ clique         &lt;dbl&gt; 1, 1, 1, 1, 1
+## $ terror_type    &lt;fct&gt; Islamism, Islamism, Islamism, Islamism, Islamism
+## $ year           &lt;dbl&gt; 2002, 2001, 1997, 1993, 1993</code></pre>
+</div>
+</div>
+</div>
+<!-- new tab -->
+<div class="ui tab" data-tab="gg_body">
+<div class="ui stackable grid">
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>()</code></pre></div>
+<p>Durch die Funktion <code>ggplot()</code> wird das Layout der Grafik initialisiert. Noch sind keine weiteren Informationen spezifiziert (Note: nicht ggplot2, der Name des packages).</p>
+</div>
+<div class="seven wide column">
+<p><img src="r_intro_files/figure-html/ggbody2-1.png" width="480" /></p>
+</div>
+</div>
+</div>
+<!-- AES -->
+<div class="ui tab" data-tab="gg_aes">
+<div class="ui stackable grid">
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> terror_type)</code></pre></div>
+<p>Die Funktion <code>aes()</code> definiert welche Variablen für welche Achsen spezifiziert werden. <code>aes()</code> hat viele weitere Parameter (Optionen):</p>
+<ul>
+<li>x: positioning along x-axis</li>
+<li>y: positioning along y-axis</li>
+<li>color: color of objects; for 2-d objects, the color of the object’s outline (compare to fill below)</li>
+<li>fill: fill color of objects</li>
+<li>alpha: transparency of objects</li>
+<li>lineterror_type: how lines should be drawn (solid, dashed, dotted, etc.)</li>
+<li>shape: shape of markers in scatter plots</li>
+<li>size: how large objects appear</li>
+</ul>
+</div>
+<div class="seven wide column">
+<p><img src="r_intro_files/figure-html/aes2-1.png" width="480" /></p>
+</div>
+</div>
+</div>
+<!-- Geom -->
+<div class="ui tab" data-tab="gg_geom">
+<div class="ui stackable grid">
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> terror_type) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>()</code></pre></div>
+<p>Es gibt unzählige <code>geom_</code> Funktionen welche für die Datendarstellung verantwortlich sind und ein eine bestimmtes Datenformat erwarten.</p>
+</div>
+<div class="seven wide column">
+<p><img src="r_intro_files/figure-html/geom2-1.png" width="480" /></p>
+</div>
+</div>
+</div>
+<!-- Colour -->
+<div class="ui tab" data-tab="gg_fill">
+<div class="ui stackable grid">
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> terror_type, <span class="dt">fill =</span> terror_type) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>()</code></pre></div>
+<p>Es gibt zwei Farb-parameter <code>fill</code> und <code>colour</code>. <code>fill</code> wird verwendet um Flächen zu kolorieren und <code>colour</code> um Lines (Outlines) und Points einzufärben.</p>
+</div>
+<div class="seven wide column">
+<p><img src="r_intro_files/figure-html/fill2-1.png" width="480" /></p>
+</div>
+</div>
+</div>
+<!-- Alpha -->
+<div class="ui tab" data-tab="gg_alpha">
+<div class="ui stackable grid">
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> terror_type, <span class="dt">fill =</span> terror_type) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">alpha =</span> .<span class="dv">7</span>)</code></pre></div>
+<p>Mit <code>alpha</code> wird die Intensität der Farbe eingestellt. 0 bedeutet komplett durchsichtig; 1 volle Sättigung.</p>
+</div>
+<div class="seven wide column">
+<p><img src="r_intro_files/figure-html/alpha2-1.png" width="480" /></p>
+</div>
+</div>
+</div>
+<!-- Labels -->
+<div class="ui tab" data-tab="gg_labs">
+<div class="ui stackable grid">
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> terror_type, <span class="dt">fill =</span> terror_type) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">alpha =</span> .<span class="dv">7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Terror Types&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Frequency by Terror Type&quot;</span>) </code></pre></div>
+<p>Die Lables an einem Plot dürfen natürlich nicht fehlen.</p>
+</div>
+<div class="seven wide column">
+<p><img src="r_intro_files/figure-html/labs2-1.png" width="480" /></p>
+</div>
+</div>
+</div>
+<!-- Facets -->
+<div class="ui tab" data-tab="gg_facet">
+<div class="ui stackable grid">
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> terror_type, <span class="dt">fill =</span> terror_type) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">alpha =</span> .<span class="dv">7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Terror Types&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Frequency by Terror Type&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>violent)</code></pre></div>
+<p>Mit <code>facet_wrap</code> kann ein Plot über mehrere Dimensionen aufgefächert werden.</p>
+</div>
+<div class="seven wide column">
+<p><img src="r_intro_files/figure-html/facet2-1.png" width="480" /></p>
+</div>
+</div>
+</div>
+<!-- theme -->
+<div class="ui tab" data-tab="gg_theme">
+<div class="ui stackable grid">
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> terror_type, <span class="dt">fill =</span> terror_type) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">alpha =</span> .<span class="dv">7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Frequency by Terror Type&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>violent) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre></div>
+<p>Mit <code>facet_wrap</code> kann ein Plot über mehrere Dimensionen aufgefächert werden.</p>
+</div>
+<div class="seven wide column">
+<p><img src="r_intro_files/figure-html/theme420-1.png" width="480" /></p>
+</div>
+</div>
+</div>
+<!-- class: .tab.demo -->
+</div>
+<script type="text/javascript">
+$(document)
+  .ready(function(){
+    $('.tab.demo .menu .item')
+      .tab({
+        context: $('.tab.demo')
+      })
+    ;
+  })
+;
+</script>
+</div>
+<div id="welche-geoms-gibts-es" class="section level2">
+<h2><span class="header-section-number">4.4</span> Welche Geoms gibts es?</h2>
+<p><code>geom_&lt;type&gt;</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">geoms_list &lt;-<span class="st"> </span><span class="kw">help.search</span>(<span class="st">&quot;geom_&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;ggplot2&quot;</span>)
+geoms_list<span class="op">$</span>matches <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Topic, Title) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+</div>
+<div id="farben" class="section level2">
+<h2><span class="header-section-number">4.5</span> Farben</h2>
+<ul>
+<li>colourpicker -&gt; Addin</li>
+</ul>
+</div>
+<div id="plot-theming" class="section level2">
+<h2><span class="header-section-number">4.6</span> Plot Theming</h2>
+<div id="themes">
+<div class="ui secondary menu">
+<div class="active item" data-tab="gg_default">
+Deafult
+</div>
+<div class="item" data-tab="gg_bw">
+BW
+</div>
+<div class="item" data-tab="gg_hc">
+HC
+</div>
+<div class="item" data-tab="gg_gdocs">
+Gdocs
+</div>
+</div>
+</div>
+<div class="ui active tab" data-tab="gg_default">
+<div class="ui stackable grid">
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> terror_type, <span class="dt">fill =</span> terror_type) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">alpha =</span> .<span class="dv">7</span>) </code></pre></div>
+<p><img src="r_intro_files/figure-html/default1-1.png" width="480" /></p>
+</div>
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(year, terror_type) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, n, <span class="dt">colour =</span> terror_type)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+<p><img src="r_intro_files/figure-html/default2-1.png" width="480" /></p>
+</div>
+</div>
+</div>
+<div class="ui tab" data-tab="gg_bw">
+<div class="ui stackable grid">
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> terror_type, <span class="dt">fill =</span> terror_type) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">alpha =</span> .<span class="dv">7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_grey</span>(<span class="st">&quot;TITLE&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="r_intro_files/figure-html/bw1-1.png" width="480" /></p>
+</div>
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(year, terror_type) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, n, <span class="dt">colour =</span> terror_type)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_colour_grey</span>(<span class="st">&quot;TITLE&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="r_intro_files/figure-html/bw2-1.png" width="480" /></p>
+</div>
+</div>
+</div>
+<div class="ui tab" data-tab="gg_hc">
+<div class="ui stackable grid">
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggthemes)
+start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> terror_type, <span class="dt">fill =</span> terror_type) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">alpha =</span> .<span class="dv">7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_hc</span>(<span class="dt">name =</span> <span class="st">&quot;TITLE&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_hc</span>()</code></pre></div>
+<p><img src="r_intro_files/figure-html/hc1-1.png" width="480" /></p>
+</div>
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggthemes)
+start_pirus <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(year, terror_type) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, n, <span class="dt">colour =</span> terror_type)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_colour_hc</span>(<span class="dt">name =</span> <span class="st">&quot;TITLE&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_hc</span>()</code></pre></div>
+<p><img src="r_intro_files/figure-html/hc2-1.png" width="480" /></p>
+</div>
+</div>
+</div>
+<div class="ui tab" data-tab="gg_gdocs">
+<div class="ui stackable grid">
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggthemes)
+start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">aes</span>(<span class="dt">x =</span> terror_type, <span class="dt">fill =</span> terror_type) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">alpha =</span> .<span class="dv">7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_gdocs</span>(<span class="dt">name =</span> <span class="st">&quot;TITLE&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_gdocs</span>()</code></pre></div>
+<p><img src="r_intro_files/figure-html/gdocs1-1.png" width="480" /></p>
+</div>
+<div class="seven wide column">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggthemes)
+start_pirus <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(year, terror_type) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, n, <span class="dt">colour =</span> terror_type)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_colour_gdocs</span>(<span class="dt">name =</span> <span class="st">&quot;TITLE&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_gdocs</span>()</code></pre></div>
+<p><img src="r_intro_files/figure-html/gdocs2-1.png" width="480" /></p>
+</div>
+</div>
+</div>
+<script>
+$('#themes .menu .item')
+  .tab({
+    context: $('#themes')
+  })
+;
+</script>
+<p><br> <br></p>
+</div>
+<div id="some-informative-plots" class="section level2">
+<h2><span class="header-section-number">4.7</span> Some Informative Plots</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, terror_type, <span class="dt">colour =</span> terror_type)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> .<span class="dv">5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
+<p><img src="r_intro_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, terror_type, <span class="dt">colour =</span> terror_type)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha =</span> .<span class="dv">5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>violent)</code></pre></div>
+<p><img src="r_intro_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year =</span> lubridate<span class="op">::</span><span class="kw">year</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(year, violent) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, n, <span class="dt">colour =</span> violent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+<p><img src="r_intro_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(year, terror_type) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, n, <span class="dt">colour =</span> terror_type)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+<p><img src="r_intro_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<!-- <div class="ui shape"> -->
+<!--   <div class="sides"> -->
+<!--   <div class="active side">This side starts visible.</div> -->
+<!--   <div class="side">This is yet another side</div> -->
+<!--   <div class="side">This is the last side</div> -->
+<!--   </div> -->
+<!-- </div> -->
+<!-- <div class = "ui teal button" id = "flip">Flip</div> -->
+<!-- <script> -->
+<!-- $(document).ready(function() { -->
+<!--   $('.shape').shape(); -->
+<!--   $('#flip').click(function({ -->
+<!--     $('.ui.shape').shape('flip up') -->
+<!--   })); -->
+<!-- }); -->
+<!-- </script> -->
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["r_intro.pdf", "r_intro.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

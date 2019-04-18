@@ -1,0 +1,382 @@
+# Grundlagen (Base-R)
+
+Zunächst einmal die Basics zu Rmarkdown.
+
+Das ist ein Chunk: 
+
+
+```{r}
+print("Hello World!")
+
+```
+
+Klick doch einfach mal auf den grünen "Play" Button.
+
+### R als Taschenrechner
+
+* `+` addieren
+* `-` subtrahieren
+* `*` multiplizieren
+* `/` dividieren
+* `^` exponieren
+
+**Aufgaben:**
+
+1. 34+77
+
+2. (500 geteilt durch 125) plus 3 mal 6 hoch 2
+
+3. Berechne die Differenz zwischen 2018 und dem Jahr, an dem du begonnen hast zu studieren und dividiere das durch die Differenz zwischen 2018 und dem Jahr, in dem du geboren wurdest. Multipliziere dies mit 100, um den Prozentsatz deines Lebens zu erhalten, den du an die Uni verbracht hast.
+
+```{r}
+
+
+
+
+
+```
+
+
+### Objekte und Zuweisung
+
+In R kann man je nach Rechenleistung zehntausende Datensätze auf einmal laden und verarbeiten. Das wird möglich da jeder Datensatz seinen eigenen Namen besitzt. Dieser muss mit einem Buchstaben beginnen, kann aber durchaus auch . oder _ oder Zahlen enthalten. Um einem Objekt einen Namen zuzuweisen wird das Zeichen <- (Zuweisungspfeil) eingesetzt. Objekte können einzelne Zahlen, Variablen oder auch Datensätze sein. Mit den Objektennamen können Daten jeglicher Art abgespeichert und abgerufen werden.
+
+__Führe einfach mal den folgenden Chunk aus!__
+
+
+```{r}
+x <- 2   #definiere x als 1
+
+x
+```
+
+**Aufgaben:**
+
+4. Erstelle ein neues Objekt y mit deiner Lieblingszahl. Addiere x und y und speichere das Ergebnis in z. Gebe z aus!
+
+```{r}
+
+
+
+```
+
+
+### Wichtige Operatoren
+
+**Boolean**
+
+- `&` (logisch) und
+- `|` (logisch) oder
+- `!` (logisch) nicht
+
+**Weitere Operatoren**
+
+- `==` (logisch) ist gleich
+- `!=` (logisch) ist ungleich
+- `%in%` Vektor ist gleich
+- `>` größer als
+- `<` kleiner als
+- `>=` größer gleich
+- `<=` kleiner gleich
+- `is.na()` ist gleich NA (fehlender Wert)
+- `!is.na()` ist ungleich NA 
+
+**Beispiele**
+
+```{r}
+3 == 3    #ist 3 gleich 3?
+4 > 5     #ist 4 größer als 5?
+"albert" == "albert"   #ist albert gleich albert vor?
+
+
+```
+
+
+R gibt hier entweder `TRUE` oder `FALSE` aus, abhängig davon ob der benutzte logische Operator zutrifft oder nicht.
+
+
+### Vektoren I
+
+Vektoren in R sind einfach mehrere Werte die aneinander gebunden werden. Diese können Zahlen aber auch strings (Buchstabenfolgen) sein. Hilfreich dabei ist die `c()` Funktion (c steht für *concatenate* = verketten auf Deutsch).
+
+**Beispiele:**
+
+
+```{r}
+c(4, 1, 3, 4, 8)
+```
+
+
+```{r}
+vektor <- c(4, 1, 3, 4, 8) #definiere Vektor mit den Werten 4, 1, 3, 4 und 8
+
+vektor
+```
+
+Operatoren können auch ganz einfach mit Vektoren angewandt werden.
+
+```{r}
+vektor * vektor     #vektor mit sich selbst mal nehmen
+vektor == vektor    #sind alle Werte von vektor gleich alle Werte von vektor?
+vektor %in% c(4, 8) #kommen 4 oder 8 in vektor vor?
+
+```
+
+
+**Aufgabe**
+
+5. Bilde einen Vektor mit dem Namen `cm` und den folgenden Größen in Zentimeter: 
+
+- `190` 
+- `152` 
+- `174` 
+
+Teile dann `cm` durch Hundert um die Größen in Meter zu erhalten!
+
+```{r}
+
+
+
+```
+
+
+Wollen wir auf einen bestimmten Wert in unserem Vektor zugreifen, dann benutzen wir __eckige Klammern__ `[...]` auf die folgende Art und Weise:
+
+```{r}
+vektor     
+vektor[3]  #gibt uns das dritte Element von vektor aus
+vektor[5]  #gibt uns das fünfte Element von vektor aus
+
+vektor[1] / vektor[4] #teile die erste Stelle von vektor durch die fünfte Stelle von vektor
+
+```
+
+### Funktionen
+
+Das Ziel einer Funktion ist es Daten zu verarbeiten. Dazu gibt es einen *input* und einen *output*. 
+
+Definieren wir doch mal eine Funktion, welche Werte die man als *input* eingibt wieder quadriert als *output* gibt. Dazu benutzen wir `function()` und bestimmen dabei die Argumente welche wir jeweils eintippen wollen. Die Funktion selber wird in geschweiften Klammern `{}` codiert.
+
+**Beispiele:**
+
+```{r}
+quadrieren <- function(input) { 
+  output <- input^2        #nehme den input hoch 2 und speichere ihn in output
+  return(output)                   #gebe output aus
+}
+
+#Funktion ausprobieren!
+quadrieren(9)   
+```
+
+Wir können auch zwei oder mehrere Argumente zu einer Funktion hinzufügen. Probieren wir das gleiche doch mal mit einer Funktion die jeder aus dem Physik - Unterricht kennen sollte:
+
+__Distanz = Geschwindigkeit * Zeit__
+
+$$Distanz = Geschwindigkeit \times Zeit$$
+
+bzw.
+
+$$s  = v * t$$
+
+**s = v * t**
+
+```{r}
+distanz <- function(v, t) {
+ s <- v * t       #v mal t und definiere deren Ergebnis als s
+ s                #gebe s aus
+}
+
+#Funktion ausprobieren!
+distanz(v = 50, t = 6)
+```
+
+Nun müssen wir allerdings nicht immer selber Funktionen definieren. Im Gegenteil! `Base R` und die vielen Packages haben unzählige Funktionen, die Datenverarbeitung einfach machen. Beispielsweise gibt `mean()` den Mittelwert eines Vektors aus und `sd()` gibt die Standardabweichung.
+
+```{r}
+vektor2 <- 1:5
+mean(vektor2)   #gib den Mittelwert von vektor aus
+sd(vektor2)     #gib die Standardabweichung von vektor aus
+```
+
+
+### Vektoren II
+
+Nun eine kleine Übersicht über die Arten von Vektoren:
+
+**Es gibt drei Hauptgruppen**
+
+- **Character:** aka "String" oder 'String', ist einfach nur Text.
+
+```{r}
+char <- c("Männlich", "Weiblich")
+class(char)
+```
+
+- **Factor:** Factors können eine Reihenfolge haben sogennante *Levels*.
+
+```{r}
+fac <- factor(c("Männlich", "Weiblich"))
+class(fac)
+```
+
+- **Numeric:** Jeglicher Zahleninput mit dem man rechnen kann.
+
+```{r}
+num <- c(1, 2, 3)
+class(num)
+```
+
+
+**Transformation zwischen den Datentypen**
+
+- `as.character()`
+
+```{r}
+as.character(num)
+```
+
+- `as.factor()`
+
+```{r}
+as.factor(char)
+```
+
+- `as.numeric()`
+
+
+```{r}
+as.numeric(fac)
+```
+
+
+### Dataframes
+
+Die meiste Zeit werden wir in R nicht mit Vektoren arbeiten, sondern mit *dataframes*. Dataframes sind letztendlich einfach nur angeordnete Vektoren und essentiell wichtig für die Datenanalyse.
+
+__Lasst uns mal einen Beispieldatensatz einladen.__
+
+
+
+## Profiles of Individual Radicalization in the United States (PIRUS)
+
+
+![](https://start.umd.edu/sites/default/files/logo.png)
+
+
+* [**Link zum Datensatz**](https://start.umd.edu/data-tools/profiles-individual-radicalization-united-states-pirus)
+* [**Andere Open Source datasets**](https://start.umd.edu/data-and-tools/start-datasets)
+
+Profiles of Individual Radicalization in the United States (PIRUS) ist eine Datenbank mit 1.867 islamistischen, extrem linken und extrem rechten Extremisten, die von 1948 bis 2016 zu gewalttätigem und gewaltfreiem Extremismus in den Vereinigten Staaten radikalisiert haben. Die Datenbank steht auf der START-Webseite kostenlos zum Download zur Verfügung. 
+
+
+Zunächst laden wir den Datensatz ein
+
+```{r}
+load("start_pirus.Rdata")
+```
+
+Hier ein kleiner Ausschnitt aus dem Datensatz:
+
+```{r, eval = F}
+start_pirus
+```
+
+**Codebook**
+
+
+| Variablen       |    Beschreibung                        |
+|-----------------|----------------------------------------|
+| subject_id      |      ID der Person                     |
+| date            |      Datum                             |
+| age             |      Alter                             |
+| male            |      Geschlecht (weiblich/männlich)    |
+| student         |      Student (0/1)                     |
+| married         |      Verheiratet (0/1)                 |
+| unemployed      |      Arbeitslos (0/1)                  |
+| mental          |      Mentale Probleme (0/1)            |
+| abuse_child     |      Als Kind misshandelt (0/1)        |
+| crime_history   |      Kriminelle Vergangenheit (0/1)    |
+| violent         |      Gewalttätiger Plan (0/1)          |
+| extent          |      Fortgeschrittenheit Planung (0-5) |
+| terror_group    |      Gruppe                            |
+| radicalization  |      Wie stark überzeugt? (1-5)        |
+| clique          |      Extremistische Clique (0/1)       |
+| terror_type     |      Ideologie                         |
+
+
+Eine Sache fällt dir vielleicht auch auf: das Kürzel _NA_ steht für _Not Available_ und symbolisiert missing values oder fehlende Werte.
+
+
+**Datenzugriff**
+
+Sehr angenehm kann man auf einzelne Variablen mit Hilfe des Dollarzeichens in der Form `data$variable` zugegriffen werden.
+
+```{r, eval = F}
+head(start_pirus$terror_group)   #zeige die ersten 5 Stellen von terror_group
+
+
+```
+
+```{r}
+start_pirus$terror_group[1]      #zeige die erste Stelle von terror_group
+start_pirus$terror_group[250]    #zeige die 250. Stelle von terror_group
+```
+
+
+**Mean**
+
+```{r}
+mean(start_pirus$age, na.rm = T)
+```
+
+
+**Aufgabe**
+
+Benutze die folgenden Funktionen mit der Variable Alter:
+
+* `min()`
+* `max()`
+* `sd()`
+* `hist()`
+
+```{r}
+
+```
+
+**Summary** 
+
+```{r}
+summary(start_pirus)
+```
+
+
+
+**Indexieren mit eckigen Klammern**
+
+Wollen wir auf verschiedene Reihen oder Spalten des dataframes zugreifen, können wir das in folgenderweise tun
+
+```{r, eval = F}
+start_pirus[1, ]        #1. Reihe
+start_pirus[, 2]        #2. Spalte
+
+start_pirus[1:10, 4]    #die ersten 10 Reihen und die vierte Spalte
+```
+
+
+**Aufgabe**
+
+5. Gib die Reihe 1000 von `start_pirus` aus
+
+6. Gib die Reihe 500 bis 600 und die erste Spalte von `start_pirus` aus
+
+```{r}
+
+
+
+```
+
+
+
+
+

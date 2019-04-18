@@ -1,0 +1,258 @@
+# Analysis
+
+<style type="text/css">
+@import url("https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css");
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js"></script>
+
+
+<div class="ui raised segment">
+  <p>Dieser Notebook repliziert einen Research Report vom Januar 2018 zu Gewalt von extremistischen Straftätern. Die Daten sind frei zugänglich [hier](https://start.umd.edu/data-and-tools/start-datasets). Der Report welchen wir replizieren ist [hier](https://www.start.umd.edu/pubs/START_PIRUS_PreRadCriminalActivityofUSExtremists_Jan2018.pdf) hinterlegt und trägt den Titel: *Pre-Radicalization Criminal Activity of United States Extremists*
+ </p>
+</div>
+
+
+```{r, include = F}
+knitr::opts_chunk$set(fig.width = 6, fig.height = 3, fig.align = "center")
+```
+
+## Packages
+
+```{r}
+pacman::p_load(tidyverse, janitor, ggthemes, texreg, sjPlot)
+```
+
+
+## Load Data
+
+
+<div class = "row">
+<div class="ui secondary menu">
+  <div class="active item" data-tab="glimpse">Glimpse</div>
+  <div class="item" data-tab="code">Code</div>
+</div>
+</div>
+
+<div class = "row">
+
+
+<div class="ui tab" data-tab="code">
+
+```{r, eval = F}
+recode_missings <- function(x) {
+  ifelse(x %in% c(-88, -99), NA, x)
+}
+
+start_pirus <- openxlsx::read.xlsx("start_pirus_2018.xlsx") %>% 
+  janitor::clean_names() %>% 
+  mutate_all(recode_missings)  %>% 
+  mutate(
+    terror_type = case_when(
+      radicalization_islamist == 1 ~ "Islamism",
+      radicalization_far_right == 1 ~ "Far Right",
+      radicalization_far_left == 1 ~ "Far Left",
+      radicalization_single_issue == 1 ~ "Single Issue"
+    ) %>% 
+    forcats::fct_relevel("Single Issue")
+  ) %>%
+  mutate(unemployed = ifelse(employment_status %in% 2:3, 1, 0)) %>% 
+  mutate(married = ifelse(marital_status == 2, 1, 0)) %>% 
+  mutate(male = ifelse(gender == 2, 1, 0)) %>% 
+  mutate(mental = ifelse(psychological %in% 1:2, 1, 0)) %>% 
+  mutate(
+    crime_history = case_when(
+      previous_criminal_activity == 0 ~ "None",
+      previous_criminal_activity == 1 ~ "Non-Violent",
+      previous_criminal_activity == 2 ~ "Non-Violent",
+      previous_criminal_activity == 3 ~ "Violent"
+    ) %>% 
+    forcats::fct_relevel("None")
+  ) %>% 
+  mutate(date = as.Date(date_exposure, origin = "1899-12-30")) %>% 
+  select(
+    subject_id, 
+    date,
+    age, 
+    male, 
+    gender,
+    married,
+    student, 
+    unemployed,
+    mental,
+    abuse_child, 
+    crime_history, 
+    violent,
+    extent = extent_plot, 
+    terror_group = terrorist_group_name1,
+    radicalization = radical_beliefs,
+    clique,
+    terror_type
+  ) %>% 
+  as_tibble() %>% 
+  mutate(date = as.Date(date, origin = "1899-12-30")) %>% #origin="1970-01-01")) %>%   
+  mutate(year = lubridate::year(date))
+
+#save(start_pirus, file = "start_pirus.Rdata")
+```
+
+
+</div>
+
+<div class="ui active tab" data-tab="glimpse">
+```{r glimpse}
+load("start_pirus.Rdata")
+start_pirus %>% 
+  glimpse
+```
+
+</div>
+
+</div>
+<!-- JAVASCRIPT TRIGGER -->
+<script>
+$('.secondary.menu .item').tab();
+</script>
+
+
+## Lineare Regression
+
+Eine lineare Regression wird auf folgende Weise durchgeführt:
+
+```{r}
+lm(extent ~ radicalization, data = start_pirus) 
+```
+
+Genauso wie alles andere in R können wir auch eine lineare Regression in ein Objekt packen:
+
+```{r}
+model1 <- lm(extent ~ radicalization, data = start_pirus) 
+
+model1
+```
+
+Die lineare Regression in ein Objekt zu packen hilft uns dabei die Resultate der Regression näher unter die Lupe zu nehmen.
+
+`screenreg` aus dem `texreg` package gibt uns eine schöne Regressiontabelle aus:
+
+```{r, result = "asis"}
+htmlreg(model1) %>% shiny::HTML(.)
+```
+
+**Aufgabe**
+
+Versucht einmal eine Regresion durchzuführen in der ihr `extent` (AV) mit `crime_history` (UV) versucht zu erklären.
+
+```{r}
+
+```
+
+
+Als nächstes wollen wir eine kleine Analyse gemeinsam ausführen. Ziel ist es zu erklären wie sich der Radikalisierungsgrad (*radicalization*) einer Person auf die Fortgeschrittenheit der Planung einer extremistischen Tat (*extent*) auswirkt. Dazu nehmen wir auch einig Kontrolle heran:
+
++ `abuse_child`
++ `crime_history`
++ `age`
++ `male`
+
+*1. Schritt: eigenen Datensatz für die Analyse erstellen und alle NAs (missing values) rauswerfen (`drop_na`)*
+
+```{r}
+start_lm <- start_pirus %>% 
+  drop_na(radicalization, age, male, abuse_child, crime_history)
+```
+
+`drop_na` entfernt alle Fälle welche in den obigen Variablen ein NA haben
+
+*2. Schritt: Bauen wir ein sequentielles Modell*
+
+```{r, analysis}
+model1 <-  lm(extent ~ radicalization, data = start_lm) 
+
+model2 <- lm(extent ~  radicalization + abuse_child + crime_history, data = start_lm) 
+
+model3 <- lm(extent ~  radicalization + abuse_child + crime_history + age + male, data = start_lm) 
+
+```
+
+*3. Schritt: Resultate darstellen*
+
+`screenreg` erlaubt es uns auch mit `list` mehrere Modelle zu übergeben:
+
+```{r, result= "asis"}
+htmlreg(list(model1, model2, model3)) %>% shiny::HTML(.)
+```
+
+*4. Schritt: Resultate visualisieren*
+
+Mit der `plot_model` Funktion aus dem `sjPlot` package können wir uns auch so genannte *coefficient plots* ausgeben lassen 
+
+```{r}
+model3 %>% 
+  plot_model(show.p = T, show.values = T, sort.est = T)
+```
+
+Aber auch die Regressionsgerade:
+
+```{r}
+model3 %>% 
+  plot_model(terror_type = "pred", terms = "radicalization")
+```
+
+Diesen Effekt können wir auch weiter aufteilen nach krimineller Vergangenheit:
+
+```{r}
+model3 %>% 
+  plot_model(terror_type = "pred", terms = c("radicalization", "crime_history"))
+```
+
+## Logistische Regression
+
+Auch logistische Regression können einfach geschätzt werden. Hier ein weiteres Modell, bei dem wir versuchen werden zu erklären wann ein Extremist Gewalt anwendet (*violent*).
+
+```{r}
+glm1 <- glm(violent ~ unemployed + married + 
+              age + male + mental + 
+              crime_history + clique + radicalization, 
+            data = start_lm, 
+            family = "binomial")
+
+summary(glm1)
+```
+
+Mit der `plot_model` Funktion aus dem `sjPlot` package können wir uns auch so genannte *coefficient plots* ausgeben lassen 
+
+```{r}
+glm1 %>% 
+  plot_model(show.p = T, show.values = T, sort.est = T)  +
+  ggthemes::theme_hc() +
+  ggthemes::scale_colour_hc()
+```
+
+**Vorhergesagte Wahrscheinlichkeit für kriminelle Vergangenheit**
+
+```{r}
+library(sjPlot)
+glm1 %>% 
+  plot_model(terror_type = "eff", terms = "crime_historyViolent") +
+  ggthemes::scale_colour_gdocs() +
+  ggthemes::theme_gdocs()
+```
+
+**Vorhergesagte Wahrscheinlichkeit für kriminelle Vergangenheit und Beziehungssatus**
+
+```{r}
+glm1 %>% 
+  plot_model(terror_type = "eff", terms = c("crime_historyViolent", "married")) +
+  ggthemes::theme_fivethirtyeight() +
+  ggthemes::scale_colour_fivethirtyeight()
+```
+
+
+**Vorhergesagte Wahrscheinlichkeit für kriminelle Vergangenheit und Familienstatus**
+
+```{r}
+glm1 %>% 
+  plot_model(terror_type = "eff", terms = c("crime_historyViolent", "male", "married"))
+```
+

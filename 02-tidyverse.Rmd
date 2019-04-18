@@ -1,0 +1,434 @@
+# Data with `dplyr` 
+
+<img src="images/dplyr.png" width = "20%>
+  
+<br>
+
+
+Neben `Base R` gibt es das **Tidyverse**, dass viele mächtige Packages enthält! 
+
+Hier eine kleine Übersicht von relevanten Funktionen, die wir brauchen werden:
+
+| Bedeutung               | tidyverse - Funktionen |
+|-------------------------|------------------------|
+| Neue Variable erstellen |      mutate()          |
+| Rekodieren (binär)      |      ifelse()          |
+| Rekodieren              |      case_when()       |
+| Variablen auswählen     |      select()          |
+| Subset erstellen        |      filter()          |
+| Variablennamen ändern   |      rename()          |
+| pipe operator           |      %>%               |
+| Datensatz gruppieren    |      group_by()        |
+| Zusammenfassen          |      summarize()       |
+| Zähle die Ausprägungen  |      count()           |
+
+
+Zunächst einmal müssen wir das Package installieren und laden. Das geht mit in Base R mit den folgenden zwei Befehlen: `install.packages` und `library`.
+
+Eine viel enstpannteres Funktion, welche Packages gleichzeitig installiert und einlädt nennt sich `pacman`. Zunächsten installieren wir es:
+
+```{r, eval = F}
+# install.packages("pacman")
+```
+
+Wir laden dann alle packages die wir brauchen auf folgende Weise:
+
+```{r}
+pacman::p_load(tidyverse)
+```
+
+Wenn man ein Package nicht laden will sondern nur eine Funktion daraus, dann kann man auch zwei Doppelpunkte `::` hinter den Packagenamen schreiben und die nötige Funktion danach denotieren.
+
+**Let's get it started!**
+
+Wieder zu den Beispieldaten:
+
+```{r}
+load("start_pirus.Rdata")
+```
+
+
+### mutate
+
+**Neue Variablen erstellen mit mutate()**
+
+Mit `mutate()` wird/werden eine oder mehrere neue Variable(n) erzeugt und an den Datensatz hinten angefügt.
+
+**Beispiel**
+
+Statt dem Alter wollen wir nun das Geburstjahr haben. Einfacherweise ziehen wir das jetzige Jahr (2018) vom Alter ab um das Geburtsjahr zu erhalten. Die neue Variable nennen wir `birth`.
+
+```{r}
+mutate(start_pirus, birth = 2018 - age)
+
+
+```
+
+Weisen wir den Datensatz wieder `start_pirus` zu, so wird unsere Veränderung auch im Objekt festgehalten
+
+```{r}
+start_pirus <- mutate(start_pirus, birth = 2018 - age)
+
+start_pirus
+```
+
+
+**Aufgabe**
+
+Der Radikalisierungsindikator (`radicalization`) geht von 1 - 5. Z-standardisiere die variable mit `scale()` und speichere sie als `radicalization_z` ab. Mit `mutate()` wird die Variable hinten angehangen. 
+
+```{r}
+
+
+
+```
+
+
+
+### ifelse
+
+Die Funktion `ifelse()` testet eine logische Bedingung in ihrem ersten Argument. Wenn der Test `TRUE` ist, gibt `ifelse()` das zweite Argument zurück. Wenn der Test `FALSE` ist, gibt `ifelse()` das dritte Argument zurück.
+
+Also in folgender Form: 
+
+`ifelse(logischer Test, was passiert wenn zutrifft, was passiert wenn nicht zutrifft)`
+
+Das können wir in Kombination mit `mutate` benutzen.
+
+**Beispiel:**
+
+Nehmen wir an, dass wir die Altervariable als eine dummy Variable (zwei Ausprägungen) benutzen wollen. Am besten geht das mit `ifelse()`. Kodieren wir doch einmal die 18-40 Jährigen als eine Gruppe und über 40 Jährige als eine andere Gruppe.
+
+Eine Variable `u40` erstellen welche die 18 bis 40 Jährigen und die über 40 Jährigen in eine Gruppe teilt.
+
+```{r}
+mutate(start_pirus, u40 = ifelse(age <= 40, "younger" ,"older"))
+#darauf achten, dass bei strings ('Wörtern') Anführungsstriche gemacht werden müssen!
+
+```
+
+
+
+**Aufgabe**
+
+7. Kodiere `male` in der folgenden Art und Weise und nenne die Variable `male_label`:
+
+1 = "männlich"
+2 = "weiblich"
+
+Überschreibe `start_pirus` zeige den Datensatz!
+
+```{r}
+start_pirus <- mutate(start_pirus, male_label = ifelse(male == 1, "male" ,"female"))
+#darauf achten, dass bei strings ('Wörtern') Anführungsstriche gemacht werden müssen!
+
+start_pirus 
+
+
+```
+
+### case_when
+
+Was aber wenn wir mehrere Werte rekodieren wollen? Enter the world of `case_when`.
+
+Mit `case_when` können wir einzelne Variablen rekodieren und sogar Bedingungen nach Lust und Laune mixen. Hier ein Beispiel:
+
+Variable Description: Prior to their radicalization, does the individual have a history of involvement in 
+non-ideologically motivated criminal activities?
+  
++ 0 = No previous criminal activity  
++ 1 = Previous (non-violent) minor criminal activity (e.g., convicted of a misdemeanor crime) 
++ 2 = Previous (non-violent) serious criminal activity (e.g., convicted of a felony crime) 
++ 3 = Previous violent crime 
+
+
+```{r}
+start_pirus <- mutate(start_pirus, crime_history = case_when(
+    crime_history == 0 ~ "None",
+    crime_history == 1 ~ "Non-Violent",
+    crime_history == 2 ~ "Non-Violent",
+    crime_history == 3 ~ "Violent"
+  )) 
+
+start_pirus
+```
+
+Jede Bedingung untereinander gereiht und mit einem Komma getrennt. Wenn eine Bedingung ein `TRUE` Statement ist, dann wird mit dem `~` Operator der entsprechende Wert zugewiesen. Gibt man `TRUE` selbst an, so kann man "alle anderen" Ausprägungen, die nicht vorher abgefragt worden sind einen Wert zuweisen. Gibt man die Originalvariable an, so bleiben die restlichen Werte wie sie sind.
+
+### select
+
+Mit `select` werden Spalten (=Vektoren/Variablen) mittels dem Variablennamen oder einer Hilfsfunktion ausgewählt. 
+
+Wählen wir wieder nur die zwei folgenden Variables aus: 
+
+- `age`
+- `gender` 
+
+```{r}
+select(start_pirus , age, gender)
+
+```
+
+`Select` eignet sich auch dafür Variablen aus einem bestehenden dataframe zu entfernen. Dies ist ganz einfach zu lösen mit einem `-` (Minus).
+
+
+```{r}
+select(start_pirus , -age, -gender)
+
+```
+
+**Aufgaben**
+
+10. Wähle die folgende Variablen aus:
+
+- `terror_group` 
+- `terror_type`
+- `crime_history`
+
+11. Wähle alle Variablen **außer** `student` und `age`.
+
+
+```{r}
+select(start_pirus , terror_group, terror_type, crime_history)
+
+select(start_pirus , -student, -age)
+
+
+```
+
+
+### filter
+
+**Zeilen auswählen mit filter()**
+
+Mit `filter()` behält man oder selektiert man Zeilen eines Datensatzes, welche bestimmte logische Kriterien oder Konditionen erfüllen. Damit wird ein Subset (Untergruppe) gebildet. Wir wählen jetzt nur die Fälle aus, welche unser Kriterium erfüllen. Jetzt zeigen wir uns Personen an, welche zur *Far Right* gehören.
+
+**Beispiel:**
+
+```{r, eval = F}
+filter(start_pirus, terror_type == "Far Right")
+
+```
+
+**Aufgaben**
+
+12. Filtere den Datensatz und zeige nur die Personen, welche sich mit der `Ku Klux Klan` identifizieren.
+
+13. Filtere den Datensatz und zeige nur die Personen, welche über 40 Jahre alt sind und eher erfolgreich waren (`extent > 3`).
+
+14. Filtere den Datensatz und zeige nur weibliche Personen, welche eine gewalttätige kriminelle Vergangenheit hatten `criminal_history`.
+
+*Hier nochmal die Operatoren zum spicken ;)*
+
+- `==` (logisch) ist gleich
+- `!=` (logisch) ist ungleich
+- `>` größer als
+- `<` kleiner als
+- `>=` größer gleich
+- `<=` kleiner gleich
+
+```{r}
+
+
+
+```
+
+
+### rename
+
+Variablen umbennen mit `rename()`
+
+Mit `rename()` lassen sich die Variablen umbennen. Beispielhaft ?bersetzen wir `terror_group`, `radicalization` und `terror_type` Variablennamen ins Deutsche.
+
+**Beispiel:**
+
+```{r}
+rename(start_pirus, group = terror_group,  rad = radicalization,  ideology = terror_type)
+```
+
+Ist eine Abkürzung des folgenden Code:
+
+```{r}
+start_pirus2 <- rename(start_pirus, group = terror_group)
+start_pirus2 <- rename(start_pirus2, rad = radicalization)
+start_pirus2 <- rename(start_pirus2, ideology = terror_type)
+
+start_pirus2
+```
+
+
+So sparen wir uns da mehrmals abspeichern! Noch besser geht das aber mit der...
+
+### Pipe %>%
+
+Mit der Hilfe von `%>%` können alle diese Operationen auf einmal ausgeführt werden!
+
+[Prozent größer Prozent] wird pipe operator genannt. Diese Pipe ermöglicht es Daten einfacher, verständlicher und lesbarer und ohne Verlust von Flexibilität zu transformieren.
+
+
+**Wichtig ist:** Den pipe operator kann man sich dabei als "danach" vorstellen. 
+
+So haben wir es bisher kennengelernt Funktionen zu benutzen:
+
+```{r}
+slice(start_pirus, 1)
+
+```
+
+Wo das erste Argument immer *der Datensatz* ist.
+
+Mit Hilfe der Pipe können wir das ganze so schreiben:
+
+```{r}
+start_pirus %>% slice(1)
+
+```
+
+
+Sequences of functions make you read inside out
+
+So weit so gut. Aber die wahre Power entfaltet die Pipe erst bei der Anwendung von mehreren Funktionen. Hier ein Beispiel wie ein etwas verwirrender Code aussehen kann.
+
+```{r}
+slice(filter(start_pirus, crime_history == "Violent"), 1)
+```
+
+Diese Methode zwingt uns dazu von innen nach außen zu lesen! *Grausam!*
+
+> Wohingegen die Pipe es uns ermöglicht von links nach rechts und von oben nach unten zu lesen1
+
+Wie gewohnt!
+
+```{r}
+start_pirus %>% 
+  filter(crime_history == "Violent") %>% 
+  slice(1)
+```
+**Ein weiterer Vorteil**
+
+Wenn wir Funktionen einzelnen ausführen dann müssen wir uch jeden Schritt einzeln mit einem neuen Objekt festhalten:
+
+```{r}
+pirus_violent <- filter(start_pirus, crime_history == "Violent")
+
+pirus_alter <- arrange(pirus_violent, age)
+
+pirus_jung <- slice(pirus_alter, 1) 
+
+pirus_jung
+```
+
+> Wohingegen die Pipe es uns ermöglicht den Datensatz nur einmal zu spezifizieren
+
+```{r}
+pirus_jung <- start_pirus %>% 
+  filter(crime_history == "Violent") %>% 
+  arrange(age) %>% 
+  slice(1) 
+
+pirus_jung
+```
+
+__dataframe first, functions second__
+
+Jetzt seid ihr dran!
+
+Benutzt die pipe für folgende Aufgaben:
+
+15. Selektiere die folgenden Variablen
+
+- `male`
+- `age`
+- `radicalization`
+- `terror_type`
+- `terror_group` 
+
+16. Filtere die Variable nur nach Männern 
+
+17. Erstelle eine neue Variable namens `strong_believer` mit der Ausprägung `1` für den Wert 5 von `radicalization` und `0` für alle anderen.
+
+18. Benenne die Variable `terror_type` in `ideology` um.
+
+19. Selektiere die folgenden Variablen
+
+- `strong_believer`
+- `ideology`
+- `age`
+
+```{r}
+
+
+
+
+
+```
+
+### Variablen(-ausprägungen) zählen mit `count`, `tabyl` und `tally`
+
+```{r}
+start_pirus %>% 
+  count(terror_group, sort = T)
+```
+
+**ist das gleiche wie:**
+
+```{r}
+start_pirus %>% 
+  janitor::tabyl(terror_type)
+
+start_pirus %>% 
+  count(terror_type, gender, sort = T)
+
+```
+
+### group_by + summary
+
+**Gruppieren und Summaries**
+
+Mit `group_by()` werden die nachfolgden Operationen gruppenweise ausgeführt. Mit `summarise()` werden die gruppierten Variablen aggregiert
+
+```{r, eval = F}
+start_pirus %>%
+  group_by(terror_type) %>% # Gruppenvariable
+  summarise(mean_age = mean(age, na.rm = T))
+```
+
+Können wir noch mit der Standardabweichung erweitern:
+
+```{r}
+start_pirus %>%
+  group_by(terror_type) %>% # Gruppenvariable
+  summarise(mean_extent = mean(extent, na.rm = T), 
+            sd_extent = sd(extent, na.rm = T)) 
+```
+
+Und noch ordnen:
+
+```{r}
+start_pirus %>%
+  group_by(terror_type) %>% # Gruppenvariable
+  summarise(mean_extent = mean(extent, na.rm = T), 
+            sd_extent = sd(extent, na.rm = T)) %>% 
+  arrange(desc(mean_extent))
+```
+
+
+**Mit tally Ausprägungen zählen**
+
+```{r}
+start_pirus %>% 
+  group_by(terror_type, gender) %>% 
+  tally()
+
+```
+
+**Aufgabe**
+
+20. Gruppiere `start_pirus` nach `gender` und rechne den Mittelwerte des Alters (`age`) per Geschlecht aus. Vergiss nicht `na.rm = T` zu spezifizieren!
+
+```{r}
+
+```
+
+
+
