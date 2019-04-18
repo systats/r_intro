@@ -2,9 +2,12 @@
 
 <style type="text/css">
 @import url("https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css");
+html, body {
+    font-size: 13px;
+}
 </style>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min,js"></script>
 
 
 <div class="ui raised segment">
